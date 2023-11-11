@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E93767932AFF932D004DD5A6 /* MoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93767922AFF932D004DD5A6 /* MoreTableViewCell.swift */; };
+		E93767962AFF9BBB004DD5A6 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93767952AFF9BBB004DD5A6 /* EmptyTableViewCell.swift */; };
 		E98143082AF92A6C008C3285 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98143072AF92A6C008C3285 /* Extension.swift */; };
 		E981430C2AF92B67008C3285 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E981430B2AF92B67008C3285 /* DataModel.swift */; };
 		E9A98FD32AF7A6B20024F77B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A98FD22AF7A6B20024F77B /* AppDelegate.swift */; };
@@ -25,9 +27,14 @@
 		E9BAB81D2AFA578300B80410 /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB81C2AFA578300B80410 /* CalenderViewController.swift */; };
 		E9BAB81F2AFA578C00B80410 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB81E2AFA578C00B80410 /* RecordsViewController.swift */; };
 		E9BAB8212AFA597100B80410 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB8202AFA597100B80410 /* DesignSystem.swift */; };
+		E9DC50152AFCDE6B00E2083C /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC50142AFCDE6B00E2083C /* MainViewModel.swift */; };
+		E9DC50182AFCDEC600E2083C /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC50172AFCDEC600E2083C /* MainTableViewCell.swift */; };
+		E9DC501A2AFCF03700E2083C /* MainTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC50192AFCF03700E2083C /* MainTableViewHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E93767922AFF932D004DD5A6 /* MoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewCell.swift; sourceTree = "<group>"; };
+		E93767952AFF9BBB004DD5A6 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
 		E98143072AF92A6C008C3285 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		E981430B2AF92B67008C3285 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		E9A98FCF2AF7A6B20024F77B /* LookIntoMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LookIntoMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +49,9 @@
 		E9BAB81C2AFA578300B80410 /* CalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewController.swift; sourceTree = "<group>"; };
 		E9BAB81E2AFA578C00B80410 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		E9BAB8202AFA597100B80410 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		E9DC50142AFCDE6B00E2083C /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		E9DC50172AFCDEC600E2083C /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		E9DC50192AFCF03700E2083C /* MainTableViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +71,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E93767942AFF9BA7004DD5A6 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		E98142FD2AF92985008C3285 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +113,8 @@
 				E9BAB8172AFA570F00B80410 /* Calender */,
 				E9BAB8162AFA559500B80410 /* Main */,
 				E9BAB8152AFA558C00B80410 /* Tabbar */,
+				E9DC50162AFCDEA000E2083C /* Cell */,
+				E93767942AFF9BA7004DD5A6 /* Common */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -189,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				E9BAB81A2AFA577800B80410 /* MainViewController.swift */,
+				E9DC50142AFCDE6B00E2083C /* MainViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -207,6 +227,17 @@
 				E9BAB81E2AFA578C00B80410 /* RecordsViewController.swift */,
 			);
 			path = Records;
+			sourceTree = "<group>";
+		};
+		E9DC50162AFCDEA000E2083C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E9DC50172AFCDEC600E2083C /* MainTableViewCell.swift */,
+				E9DC50192AFCF03700E2083C /* MainTableViewHeaderView.swift */,
+				E93767922AFF932D004DD5A6 /* MoreTableViewCell.swift */,
+				E93767952AFF9BBB004DD5A6 /* EmptyTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,8 +324,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9DC50182AFCDEC600E2083C /* MainTableViewCell.swift in Sources */,
 				E981430C2AF92B67008C3285 /* DataModel.swift in Sources */,
+				E9DC50152AFCDE6B00E2083C /* MainViewModel.swift in Sources */,
 				E9A98FD72AF7A6B20024F77B /* TabbarViewController.swift in Sources */,
+				E9DC501A2AFCF03700E2083C /* MainTableViewHeaderView.swift in Sources */,
+				E93767962AFF9BBB004DD5A6 /* EmptyTableViewCell.swift in Sources */,
+				E93767932AFF932D004DD5A6 /* MoreTableViewCell.swift in Sources */,
 				E9A98FD32AF7A6B20024F77B /* AppDelegate.swift in Sources */,
 				E9BAB8212AFA597100B80410 /* DesignSystem.swift in Sources */,
 				E9BAB81B2AFA577800B80410 /* MainViewController.swift in Sources */,

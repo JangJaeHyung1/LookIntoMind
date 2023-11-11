@@ -8,18 +8,32 @@
 import UIKit
 
 struct BaseColor {
-    static let unSelected = UIColor.rgba(243, 242, 241, 1)
-    static let main = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-    static let sub = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 1)
-    static let tint = UIColor(red: 1, green: 0.48, blue: 0, alpha: 1)
-    static let difficulty = UIColor(red: 0.296, green: 0.366, blue: 1, alpha: 1)
-    static let difficultyBg = UIColor(red: 0.954, green: 0.954, blue: 0.954, alpha: 1)
-    static let btnColor =  UIColor(red: 1, green: 0.25, blue: 0.25, alpha: 1)
-    static let placeholder = UIColor(red: 0.646, green: 0.646, blue: 0.646, alpha: 1)
-    static let border = UIColor(red: 0.742, green: 0.742, blue: 0.742, alpha: 1)
-    static let tabbarTintColor = UIColor(red: 1, green: 0.25, blue: 0.25, alpha: 1)
-    static let red = UIColor(red: 1, green: 0.279, blue: 0.279, alpha: 1)
-    static let progressBarBg = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)
-    static let progressBar = UIColor(red: 1, green: 0.246, blue: 0.246, alpha: 1)
+    static let black = UIColor.rgba(0, 0, 0, 1)
+    static let white = UIColor.rgba(255, 255, 255, 1)
+    
+    static let gray1 = UIColor.rgba(34, 34, 34, 1)
+    static let gray2 = UIColor.rgba(68, 68, 68, 1)
+    static let gray3 = UIColor.rgba(136, 136, 136, 1)
+    static let gray4 = UIColor.rgba(189, 189, 189, 1)
+    static let gray5 = UIColor.rgba(221, 221, 221, 1)
+    static let gray6 = UIColor.rgba(233, 233, 233, 1)
+    static let gray7 = UIColor.rgba(243, 243, 243, 1)
+    
 }
 
+struct BaseFont {
+    static let title1 = UIFont.customFont(ofSize: 24, weight: .bold, lineHeight: 36)
+    static let title2 = UIFont.customFont(ofSize: 16, weight: .bold, lineHeight: 24)
+    static let title2_num = UIFont.customFont(ofSize: 16, weight: .bold, lineHeight: 24)
+    
+    static let body1 = UIFont.customFont(ofSize: 18, weight: .bold, lineHeight: 24)
+    
+    static let body2 = UIFont.customFont(ofSize: 16, weight: .regular, lineHeight: 24)
+    static let body2_long = UIFont.customFont(ofSize: 16, weight: .regular, lineHeight: 28)
+    static let body2_num = UIFont.customFont(ofSize: 16, weight: .regular, lineHeight: 24)
+    
+    static let body3 = UIFont.customFont(ofSize: 14, weight: .bold, lineHeight: 20)
+    static let body4 = UIFont.customFont(ofSize: 14, weight: .regular, lineHeight: 20)
+    static let body4_num = UIFont.customFont(ofSize: 14, weight: .regular, lineHeight: 20)
+    
+}

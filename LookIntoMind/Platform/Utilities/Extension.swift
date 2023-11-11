@@ -81,7 +81,7 @@ extension UITabBar {
     static func clearShadow() {
         UITabBar.appearance().shadowImage = UIImage()
         UITabBar.appearance().backgroundImage = UIImage()
-        UITabBar.appearance().backgroundColor = UIColor.white
+        UITabBar.appearance().backgroundColor = BaseColor.gray7
     }
 }
 
@@ -192,5 +192,38 @@ extension UIColor {
             green: (rgb >> 8) & 0xFF,
             blue: rgb & 0xFF
         )
+    }
+}
+
+extension UIFont {
+    static func customFont(ofSize fontSize: CGFloat, weight: UIFont.Weight, lineHeight: CGFloat) -> UIFont {
+        let font = UIFont.systemFont(ofSize: fontSize, weight: weight)
+        let lineHeightMultiple = lineHeight / font.lineHeight
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = lineHeightMultiple
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .paragraphStyle: paragraphStyle
+        ]
+
+        return UIFont(descriptor: font.fontDescriptor, size: fontSize).withTraits(traits: .traitBold)
+    }
+}
+
+extension UIFont {
+    func withTraits(traits: UIFontDescriptor.SymbolicTraits) -> UIFont {
+        let descriptor = fontDescriptor.withSymbolicTraits(traits)
+        return UIFont(descriptor: descriptor!, size: 0)
+    }
+}
+
+extension UITableView {
+    func lastIndexpath() -> IndexPath {
+        let section = max(numberOfSections - 1, 0)
+        let row = max(numberOfRows(inSection: section) - 1, 0)
+
+        return IndexPath(row: row, section: section)
     }
 }

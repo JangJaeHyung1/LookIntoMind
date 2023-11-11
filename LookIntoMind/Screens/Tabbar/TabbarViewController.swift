@@ -12,7 +12,7 @@ import RxCocoa
 class TabbarViewController: UITabBarController  {
     private let safeLayoutView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = BaseColor.gray7
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = true
         return view
@@ -21,6 +21,7 @@ class TabbarViewController: UITabBarController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
+        self.selectedIndex = 1
         overrideUserInterfaceStyle = .light
     }
     
@@ -55,7 +56,7 @@ extension TabbarViewController {
     }
     private func setupStyle() {
         UITabBar.clearShadow()
-        tabBar.layer.applyShadow(color: .gray, alpha: 0.3, x: 0, y: 0, blur: 12)
+//        tabBar.layer.applyShadow(color: .gray, alpha: 0.3, x: 0, y: 0, blur: 12)
     }
     
     private func setNavi() {
@@ -66,8 +67,8 @@ extension TabbarViewController {
     
     private func setTabBar(){
         
-        let vc1 = MainViewController()
-        let vc2 = CalenderViewController()
+        let vc1 = CalenderViewController()
+        let vc2 = MainViewController()
         let vc3 = RecordsViewController()
         
         self.setViewControllers([vc1,vc2,vc3], animated: false)
@@ -76,8 +77,8 @@ extension TabbarViewController {
         for item in items {
             item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
         }
-        let itemsImage = ["main_unselected","calender_unselected","records_unselected"]
-        let selectedImages = ["main_selected","calender_selected","records_selected"]
+        let itemsImage = ["calender_unselected", "main_unselected","records_unselected"]
+        let selectedImages = ["calender_selected", "main_selected","records_selected"]
         for x in 0...2 {
             let image = UIImage(named: itemsImage[x])?.resizedImage(Size: CGSize(width: 24, height: 24))
             
