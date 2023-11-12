@@ -12,6 +12,7 @@ struct DataModel {
     var category: MainCategory
     var subCategory: String
     var content: String
+    
 }
 
 enum MainCategory: String {

@@ -15,7 +15,17 @@ import Realm
 class MainViewController: UIViewController {
 
     var tableView: UITableView!
-    
+    var moreBtnIsHidden: Bool = false
+    var todayData: DataModel?
+    var recordData: [DataModel] = [
+        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.worry]![0], content: "흠..1"),
+        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.wonder]![0], content: "흠..2"),
+        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.anger]![0], content: "흠..3"),
+        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.anger]![0], content: "흠..4"),
+        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.anger]![0], content: "흠..5"),
+        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.anger]![0], content: "흠..6"),
+        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.anger]![0], content: "흠..7"),
+    ]
     private let safeBGView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -112,28 +122,45 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return 12 + 1
+            if recordData.isEmpty {
+                return 1
+            } else {
+                if !moreBtnIsHidden {
+                    return recordData.count + 1
+                } else {
+                    return recordData.count
+                }
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath == IndexPath(row: 0, section: 1){
-            let cell = tableView.dequeueReusableCell(withIdentifier: EmptyTableViewCell.cellId, for: indexPath) as! EmptyTableViewCell
-            cell.selectionStyle = .none
-            return cell
-        }
-        else if indexPath == tableView.lastIndexpath() {
-            let cell = tableView.dequeueReusableCell(withIdentifier: MoreTableViewCell.cellId, for: indexPath) as! MoreTableViewCell
-            cell.selectionStyle = .none
+        // MARK: - 테이블뷰 셀
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.cellId, for: indexPath) as! MainTableViewCell
+            cell.configure(with: self.todayData, idx: indexPath)
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.cellId, for: indexPath) as! MainTableViewCell
-            cell.selectionStyle = .none
-            cell.configure(with: .init(date: Date(), category: .wonder, subCategory: SubCategory.array[.wonder]![0], content: "123"), idx: indexPath)
-            return cell
+            if recordData.isEmpty {
+                let cell = tableView.dequeueReusableCell(withIdentifier: EmptyTableViewCell.cellId, for: indexPath) as! EmptyTableViewCell
+                return cell
+            } else {
+                if !moreBtnIsHidden {
+                    if indexPath == tableView.lastIndexpath() {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: MoreTableViewCell.cellId, for: indexPath) as! MoreTableViewCell
+                        return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.cellId, for: indexPath) as! MainTableViewCell
+                        cell.configure(with: recordData[indexPath.row], idx: indexPath)
+                        return cell
+                    }
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.cellId, for: indexPath) as! MainTableViewCell
+                    cell.configure(with: recordData[indexPath.row], idx: indexPath)
+                    return cell
+                }
+            }
         }
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -162,4 +189,37 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if moreBtnIsHidden && indexPath.section == 1{
+            if indexPath == tableView.lastIndexpath() {
+                // fetch
+                recordData += recordData
+                tableView.reloadData()
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            if todayData == nil {
+                // 일기쓰기
+            } else {
+                // 일기보기
+            }
+        } else {
+            if !recordData.isEmpty {
+                if tableView.lastIndexpath() == indexPath && !moreBtnIsHidden{
+                    print("tap 감정더보기")
+                    moreBtnIsHidden = true
+                    // fetch
+                    recordData += recordData
+                    tableView.reloadData()
+                } else {
+                    // 일기보기
+                }
+            }
+        }
+    }
+    
 }

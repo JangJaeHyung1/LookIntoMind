@@ -28,12 +28,12 @@ struct BaseFont {
     
     static let body1 = UIFont.customFont(ofSize: 18, weight: .bold, lineHeight: 24)
     
-    static let body2 = UIFont.customFont(ofSize: 16, weight: .regular, lineHeight: 24)
-    static let body2_long = UIFont.customFont(ofSize: 16, weight: .regular, lineHeight: 28)
-    static let body2_num = UIFont.customFont(ofSize: 16, weight: .regular, lineHeight: 24)
+    static let body2 = UIFont.customFont(ofSize: 16, weight: .medium, lineHeight: 24)
+    static let body2_long = UIFont.customFont(ofSize: 16, weight: .medium, lineHeight: 28)
+    static let body2_num = UIFont.customFont(ofSize: 16, weight: .medium, lineHeight: 24)
     
     static let body3 = UIFont.customFont(ofSize: 14, weight: .bold, lineHeight: 20)
-    static let body4 = UIFont.customFont(ofSize: 14, weight: .regular, lineHeight: 20)
-    static let body4_num = UIFont.customFont(ofSize: 14, weight: .regular, lineHeight: 20)
+    static let body4 = UIFont.customFont(ofSize: 14, weight: .medium, lineHeight: 20)
+    static let body4_num = UIFont.customFont(ofSize: 14, weight: .medium, lineHeight: 20)
     
 }

@@ -28,7 +28,7 @@ class MainTableViewCell: UITableViewCell {
         lbl.font = BaseFont.body4_num
         lbl.textColor = BaseColor.gray3
         lbl.lineBreakMode = .byWordWrapping
-        lbl.text = "11.5 일요일"
+        lbl.text = ""
         lbl.isUserInteractionEnabled = true
         return lbl
     }()
@@ -58,6 +58,7 @@ class MainTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
         backgroundColor = BaseColor.gray7
+        selectionStyle = .none
     }
     
     override func prepareForReuse() {
@@ -107,19 +108,20 @@ class MainTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
         }
     }
-    func configure(with presentable: DataModel, idx: IndexPath) {
-        if idx.section == 0 {
+    func configure(with presentable: DataModel?, idx: IndexPath) {
+        guard let presentable = presentable else {
             titleLbl.text = "마음 들여다보기"
             cellView.backgroundColor = BaseColor.black
             titleLbl.textColor = BaseColor.white
             emotionImageView.image = UIImage(named: "today_next")
-            
-        } else {
-//            titleLbl.text =
-            titleLbl.text = presentable.subCategory
-            cellView.backgroundColor = BaseColor.white
-            titleLbl.textColor = BaseColor.black
-            emotionImageView.image = UIImage(named: presentable.category.rawValue)
+            dateLbl.text = Date().toString(Date().main)
+            return
         }
+        titleLbl.text = presentable.subCategory
+        cellView.backgroundColor = BaseColor.white
+        titleLbl.textColor = BaseColor.black
+        emotionImageView.image = UIImage(named: presentable.category.rawValue)
+        dateLbl.text = presentable.date.toString(presentable.date.main)
+        
     }
 }

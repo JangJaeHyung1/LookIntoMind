@@ -33,6 +33,7 @@ class MoreTableViewCell: UITableViewCell {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.adjustsImageWhenHighlighted = false
+        btn.isHidden = true
         return btn
     }()
     
@@ -61,6 +62,7 @@ class MoreTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
         backgroundColor = BaseColor.gray7
+        selectionStyle = .none
     }
     
     override func prepareForReuse() {

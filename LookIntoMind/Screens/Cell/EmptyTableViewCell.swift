@@ -37,6 +37,7 @@ class EmptyTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
         backgroundColor = BaseColor.gray7
+        selectionStyle = .none
     }
     
     override func prepareForReuse() {
