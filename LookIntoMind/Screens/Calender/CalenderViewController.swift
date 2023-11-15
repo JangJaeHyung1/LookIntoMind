@@ -172,27 +172,22 @@ extension CalenderViewController: FSCalendarDelegate, FSCalendarDataSource, UICo
         
         calendarView.appearance.headerMinimumDissolvedAlpha = 0.0
         calendarView.appearance.headerDateFormat = "YYYY.MM"
-        
         calendarView.appearance.headerTitleColor = BaseColor.black
         calendarView.appearance.headerTitleFont = BaseFont.title2_num
-        calendarView.appearance.selectionColor = UIColor.clear
-        calendarView.appearance.titleSelectionColor = BaseColor.gray4
         
+        calendarView.appearance.titleSelectionColor = BaseColor.gray4
         calendarView.appearance.todayColor = UIColor.clear
-        // 월 ~ 일
+        calendarView.appearance.selectionColor = UIColor.clear
+        
         calendarView.appearance.weekdayFont = BaseFont.body2
         calendarView.appearance.weekdayTextColor = BaseColor.gray3
-        // 평일 & 주말 색상 설정
-        calendarView.appearance.titleDefaultColor = BaseColor.gray4  // 평일
-        calendarView.appearance.titleWeekendColor = BaseColor.gray4  // 주말
+        
+        calendarView.appearance.titleSelectionColor = UIColor.clear
+        calendarView.appearance.titleDefaultColor = UIColor.clear
+        calendarView.appearance.titleWeekendColor = UIColor.clear
+        calendarView.appearance.titleTodayColor = UIColor.clear
         calendarView.appearance.titleFont = BaseFont.body2_num
-        let todayRecord = records.filter({$0.date.toString($0.date.summary) == Date().toString(Date().summary)}).first
-        if todayRecord == nil {
-            calendarView.appearance.titleTodayColor = BaseColor.black
-        } else {
-            calendarView.appearance.titleTodayColor = BaseColor.white
-        }
-        // 달에 유효하지 않은 날짜 없애기
+        
         calendarView.placeholderType = .none
      
     }
