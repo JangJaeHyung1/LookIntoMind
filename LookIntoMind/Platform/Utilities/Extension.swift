@@ -155,6 +155,17 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    func createSpinnerView() -> UIView {
+        let spinnerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        
+        let spinner = UIActivityIndicatorView()
+        spinner.center = spinnerView.center
+        spinnerView.addSubview(spinner)
+        spinner.startAnimating()
+        
+        return spinnerView
+    }
 }
 
 

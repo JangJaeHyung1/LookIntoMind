@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E91F94BC2B04E36A008B4D9A /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F94BB2B04E36A008B4D9A /* CalendarCollectionViewCell.swift */; };
 		E93767932AFF932D004DD5A6 /* MoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93767922AFF932D004DD5A6 /* MoreTableViewCell.swift */; };
 		E93767962AFF9BBB004DD5A6 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93767952AFF9BBB004DD5A6 /* EmptyTableViewCell.swift */; };
+		E97AAE8A2B02521900EC60B0 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = E97AAE892B02521900EC60B0 /* FSCalendar */; };
 		E98143082AF92A6C008C3285 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98143072AF92A6C008C3285 /* Extension.swift */; };
 		E981430C2AF92B67008C3285 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E981430B2AF92B67008C3285 /* DataModel.swift */; };
 		E9A98FD32AF7A6B20024F77B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A98FD22AF7A6B20024F77B /* AppDelegate.swift */; };
@@ -33,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E91F94BB2B04E36A008B4D9A /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		E93767922AFF932D004DD5A6 /* MoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewCell.swift; sourceTree = "<group>"; };
 		E93767952AFF9BBB004DD5A6 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
 		E98143072AF92A6C008C3285 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -64,6 +67,7 @@
 				E9A98FF12AF7B68C0024F77B /* RxSwift in Frameworks */,
 				E9A98FF42AF7C3520024F77B /* SnapKit in Frameworks */,
 				E9A98FEF2AF7B68C0024F77B /* RxRelay in Frameworks */,
+				E97AAE8A2B02521900EC60B0 /* FSCalendar in Frameworks */,
 				E9A98FE82AF7B43C0024F77B /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				E9BAB81C2AFA578300B80410 /* CalenderViewController.swift */,
+				E91F94BB2B04E36A008B4D9A /* CalendarCollectionViewCell.swift */,
 			);
 			path = Calender;
 			sourceTree = "<group>";
@@ -263,6 +268,7 @@
 				E9A98FEE2AF7B68C0024F77B /* RxRelay */,
 				E9A98FF02AF7B68C0024F77B /* RxSwift */,
 				E9A98FF32AF7C3520024F77B /* SnapKit */,
+				E97AAE892B02521900EC60B0 /* FSCalendar */,
 			);
 			productName = LookIntoMind;
 			productReference = E9A98FCF2AF7A6B20024F77B /* LookIntoMind.app */;
@@ -296,6 +302,7 @@
 				E9A98FE62AF7B43C0024F77B /* XCRemoteSwiftPackageReference "realm-swift" */,
 				E9A98FEB2AF7B68C0024F77B /* XCRemoteSwiftPackageReference "RxSwift" */,
 				E9A98FF22AF7C3520024F77B /* XCRemoteSwiftPackageReference "SnapKit" */,
+				E97AAE882B02521900EC60B0 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = E9A98FD02AF7A6B20024F77B /* Products */;
 			projectDirPath = "";
@@ -333,6 +340,7 @@
 				E93767932AFF932D004DD5A6 /* MoreTableViewCell.swift in Sources */,
 				E9A98FD32AF7A6B20024F77B /* AppDelegate.swift in Sources */,
 				E9BAB8212AFA597100B80410 /* DesignSystem.swift in Sources */,
+				E91F94BC2B04E36A008B4D9A /* CalendarCollectionViewCell.swift in Sources */,
 				E9BAB81B2AFA577800B80410 /* MainViewController.swift in Sources */,
 				E9BAB81D2AFA578300B80410 /* CalenderViewController.swift in Sources */,
 				E9A98FD52AF7A6B20024F77B /* SceneDelegate.swift in Sources */,
@@ -492,6 +500,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -520,6 +529,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -557,6 +567,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E97AAE882B02521900EC60B0 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		E9A98FE62AF7B43C0024F77B /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
@@ -584,6 +602,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E97AAE892B02521900EC60B0 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E97AAE882B02521900EC60B0 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
 		E9A98FE72AF7B43C0024F77B /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E9A98FE62AF7B43C0024F77B /* XCRemoteSwiftPackageReference "realm-swift" */;

@@ -69,7 +69,7 @@ class EmptyTableViewCell: UITableViewCell {
         cellView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4).isActive = true
         cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
-        cellView.heightAnchor.constraint(equalToConstant: 92).isActive = true
+        cellView.heightAnchor.constraint(equalToConstant: 90).isActive = true
         titleLbl.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }

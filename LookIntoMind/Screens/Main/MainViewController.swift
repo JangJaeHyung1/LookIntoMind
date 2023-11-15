@@ -136,6 +136,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // MARK: - 테이블뷰 셀
+        tableView.tableFooterView = nil
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.cellId, for: indexPath) as! MainTableViewCell
             cell.configure(with: self.todayData, idx: indexPath)
@@ -168,7 +169,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 92
+        return 90
     }
     
      
@@ -194,6 +195,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if moreBtnIsHidden && indexPath.section == 1{
             if indexPath == tableView.lastIndexpath() {
                 // fetch
+                tableView.tableFooterView = createSpinnerView()
                 recordData += recordData
                 tableView.reloadData()
             }
@@ -213,6 +215,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                     print("tap 감정더보기")
                     moreBtnIsHidden = true
                     // fetch
+                    tableView.tableFooterView = createSpinnerView()
                     recordData += recordData
                     tableView.reloadData()
                 } else {

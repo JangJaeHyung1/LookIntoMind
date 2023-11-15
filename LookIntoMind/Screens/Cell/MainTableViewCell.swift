@@ -95,12 +95,12 @@ class MainTableViewCell: UITableViewCell {
         
         dateLbl.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(24)
-            make.top.equalTo(21.5)
+            make.top.equalTo(21)
         }
         titleLbl.snp.makeConstraints { make in
             make.leading.equalTo(dateLbl)
             make.top.equalTo(dateLbl.snp.bottom).offset(4)
-            make.bottom.equalToSuperview().offset(-22.5)
+            make.bottom.equalToSuperview().offset(-21)
         }
         emotionImageView.snp.makeConstraints { make in
             make.width.height.equalTo(60)
