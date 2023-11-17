@@ -13,6 +13,9 @@
 		E97AAE8A2B02521900EC60B0 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = E97AAE892B02521900EC60B0 /* FSCalendar */; };
 		E98143082AF92A6C008C3285 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98143072AF92A6C008C3285 /* Extension.swift */; };
 		E981430C2AF92B67008C3285 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E981430B2AF92B67008C3285 /* DataModel.swift */; };
+		E9A22A8B2B076560000BC944 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = E9A22A8A2B076560000BC944 /* Gifu */; };
+		E9A22A8D2B076983000BC944 /* Splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = E9A22A8C2B076983000BC944 /* Splash.gif */; };
+		E9A22A902B076B7B000BC944 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A22A8F2B076B7B000BC944 /* SplashViewController.swift */; };
 		E9A98FD32AF7A6B20024F77B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A98FD22AF7A6B20024F77B /* AppDelegate.swift */; };
 		E9A98FD52AF7A6B20024F77B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A98FD42AF7A6B20024F77B /* SceneDelegate.swift */; };
 		E9A98FD72AF7A6B20024F77B /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A98FD62AF7A6B20024F77B /* TabbarViewController.swift */; };
@@ -40,6 +43,8 @@
 		E93767952AFF9BBB004DD5A6 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
 		E98143072AF92A6C008C3285 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		E981430B2AF92B67008C3285 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		E9A22A8C2B076983000BC944 /* Splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Splash.gif; sourceTree = "<group>"; };
+		E9A22A8F2B076B7B000BC944 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		E9A98FCF2AF7A6B20024F77B /* LookIntoMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LookIntoMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A98FD22AF7A6B20024F77B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9A98FD42AF7A6B20024F77B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +74,7 @@
 				E9A98FEF2AF7B68C0024F77B /* RxRelay in Frameworks */,
 				E97AAE8A2B02521900EC60B0 /* FSCalendar in Frameworks */,
 				E9A98FE82AF7B43C0024F77B /* Realm in Frameworks */,
+				E9A22A8B2B076560000BC944 /* Gifu in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +112,7 @@
 		E98142FF2AF929F2008C3285 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				E9A22A8C2B076983000BC944 /* Splash.gif */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -113,6 +120,7 @@
 		E98143002AF929FC008C3285 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				E9A22A8E2B076B6E000BC944 /* Splash */,
 				E9BAB8182AFA572500B80410 /* Records */,
 				E9BAB8172AFA570F00B80410 /* Calender */,
 				E9BAB8162AFA559500B80410 /* Main */,
@@ -170,6 +178,14 @@
 			children = (
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		E9A22A8E2B076B6E000BC944 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				E9A22A8F2B076B7B000BC944 /* SplashViewController.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		E9A98FC62AF7A6B20024F77B = {
@@ -269,6 +285,7 @@
 				E9A98FF02AF7B68C0024F77B /* RxSwift */,
 				E9A98FF32AF7C3520024F77B /* SnapKit */,
 				E97AAE892B02521900EC60B0 /* FSCalendar */,
+				E9A22A8A2B076560000BC944 /* Gifu */,
 			);
 			productName = LookIntoMind;
 			productReference = E9A98FCF2AF7A6B20024F77B /* LookIntoMind.app */;
@@ -303,6 +320,7 @@
 				E9A98FEB2AF7B68C0024F77B /* XCRemoteSwiftPackageReference "RxSwift" */,
 				E9A98FF22AF7C3520024F77B /* XCRemoteSwiftPackageReference "SnapKit" */,
 				E97AAE882B02521900EC60B0 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				E9A22A892B076560000BC944 /* XCRemoteSwiftPackageReference "Gifu" */,
 			);
 			productRefGroup = E9A98FD02AF7A6B20024F77B /* Products */;
 			projectDirPath = "";
@@ -319,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9A98FDF2AF7A6B40024F77B /* LaunchScreen.storyboard in Resources */,
+				E9A22A8D2B076983000BC944 /* Splash.gif in Resources */,
 				E9A98FDC2AF7A6B40024F77B /* Assets.xcassets in Resources */,
 				E9A98FDA2AF7A6B20024F77B /* Main.storyboard in Resources */,
 			);
@@ -346,6 +365,7 @@
 				E9A98FD52AF7A6B20024F77B /* SceneDelegate.swift in Sources */,
 				E98143082AF92A6C008C3285 /* Extension.swift in Sources */,
 				E9BAB81F2AFA578C00B80410 /* RecordsViewController.swift in Sources */,
+				E9A22A902B076B7B000BC944 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +595,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		E9A22A892B076560000BC944 /* XCRemoteSwiftPackageReference "Gifu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kaishin/Gifu";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		E9A98FE62AF7B43C0024F77B /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
@@ -606,6 +634,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E97AAE882B02521900EC60B0 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		E9A22A8A2B076560000BC944 /* Gifu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9A22A892B076560000BC944 /* XCRemoteSwiftPackageReference "Gifu" */;
+			productName = Gifu;
 		};
 		E9A98FE72AF7B43C0024F77B /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;

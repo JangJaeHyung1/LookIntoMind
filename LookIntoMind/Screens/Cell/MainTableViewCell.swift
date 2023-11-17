@@ -103,7 +103,7 @@ class MainTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview().offset(-21)
         }
         emotionImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(60)
+            make.width.height.equalTo(50)
             make.trailing.equalToSuperview().offset(-24)
             make.centerY.equalToSuperview()
         }

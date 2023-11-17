@@ -18,8 +18,8 @@ class MainViewController: UIViewController {
     var moreBtnIsHidden: Bool = false
     var todayData: DataModel?
     var recordData: [DataModel] = [
-        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.worry]![0], content: "흠..1"),
-        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.wonder]![0], content: "흠..2"),
+        DataModel(date: Date(), category: .worry, subCategory: SubCategory.array[.worry]![0], content: "흠..1"),
+        DataModel(date: Date(), category: .wonder, subCategory: SubCategory.array[.wonder]![0], content: "흠..2"),
         DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.anger]![0], content: "흠..3"),
         DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.anger]![0], content: "흠..4"),
         DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.anger]![0], content: "흠..5"),
@@ -36,6 +36,11 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+// 1. 데이터가 12개 미만이면 more Btn 비활성화
+// 2. 데이터가 12개 이상이면 more Btn 활성화
+// 3. 데이터가 12개 이상일때 more btn 이후 12개씩 불러오기
+// 4. 데이터가 더 불러올게 없으면 Fetch 하지않음
         setUp()
     }
     
@@ -78,11 +83,7 @@ extension MainViewController {
         tableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.cellId)
         tableView.register(MoreTableViewCell.self, forCellReuseIdentifier: MoreTableViewCell.cellId)
         tableView.register(EmptyTableViewCell.self, forCellReuseIdentifier: EmptyTableViewCell.cellId)
-//        tableView.contentInset.bottom = 40
         tableView.backgroundColor = BaseColor.gray7
-        //    private let refreshControl = UIRefreshControl()
-        //    tableView.refreshControl = refreshControl
-        //    refreshControl.transform = .init(scaleX: 0.75, y: 0.75)
         tableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
