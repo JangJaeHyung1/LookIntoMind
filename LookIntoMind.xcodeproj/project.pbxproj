@@ -16,6 +16,13 @@
 		E9A22A8B2B076560000BC944 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = E9A22A8A2B076560000BC944 /* Gifu */; };
 		E9A22A8D2B076983000BC944 /* Splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = E9A22A8C2B076983000BC944 /* Splash.gif */; };
 		E9A22A902B076B7B000BC944 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A22A8F2B076B7B000BC944 /* SplashViewController.swift */; };
+		E9A22A932B08CA4C000BC944 /* FirstCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A22A922B08CA4C000BC944 /* FirstCreateViewController.swift */; };
+		E9A22A952B08CAC3000BC944 /* NaviView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A22A942B08CAC3000BC944 /* NaviView.swift */; };
+		E9A22A982B09EB85000BC944 /* FirstCreateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A22A972B09EB85000BC944 /* FirstCreateCollectionViewCell.swift */; };
+		E9A22A9A2B0A1ADA000BC944 /* FirstCreateCVHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A22A992B0A1ADA000BC944 /* FirstCreateCVHeader.swift */; };
+		E9A22A9E2B0A213D000BC944 /* SecondCeateCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A22A9D2B0A213D000BC944 /* SecondCeateCollectionReusableView.swift */; };
+		E9A22AA02B0A214F000BC944 /* SecondCreateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A22A9F2B0A214F000BC944 /* SecondCreateCollectionViewCell.swift */; };
+		E9A22AA22B0A215C000BC944 /* SecondCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A22AA12B0A215C000BC944 /* SecondCreateViewController.swift */; };
 		E9A98FD32AF7A6B20024F77B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A98FD22AF7A6B20024F77B /* AppDelegate.swift */; };
 		E9A98FD52AF7A6B20024F77B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A98FD42AF7A6B20024F77B /* SceneDelegate.swift */; };
 		E9A98FD72AF7A6B20024F77B /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A98FD62AF7A6B20024F77B /* TabbarViewController.swift */; };
@@ -45,6 +52,13 @@
 		E981430B2AF92B67008C3285 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		E9A22A8C2B076983000BC944 /* Splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Splash.gif; sourceTree = "<group>"; };
 		E9A22A8F2B076B7B000BC944 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		E9A22A922B08CA4C000BC944 /* FirstCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCreateViewController.swift; sourceTree = "<group>"; };
+		E9A22A942B08CAC3000BC944 /* NaviView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviView.swift; sourceTree = "<group>"; };
+		E9A22A972B09EB85000BC944 /* FirstCreateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCreateCollectionViewCell.swift; sourceTree = "<group>"; };
+		E9A22A992B0A1ADA000BC944 /* FirstCreateCVHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCreateCVHeader.swift; sourceTree = "<group>"; };
+		E9A22A9D2B0A213D000BC944 /* SecondCeateCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCeateCollectionReusableView.swift; sourceTree = "<group>"; };
+		E9A22A9F2B0A214F000BC944 /* SecondCreateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCreateCollectionViewCell.swift; sourceTree = "<group>"; };
+		E9A22AA12B0A215C000BC944 /* SecondCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCreateViewController.swift; sourceTree = "<group>"; };
 		E9A98FCF2AF7A6B20024F77B /* LookIntoMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LookIntoMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A98FD22AF7A6B20024F77B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9A98FD42AF7A6B20024F77B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +98,7 @@
 		E93767942AFF9BA7004DD5A6 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E9A22A942B08CAC3000BC944 /* NaviView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -120,12 +135,12 @@
 		E98143002AF929FC008C3285 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				E9A22A912B08CA10000BC944 /* Create */,
 				E9A22A8E2B076B6E000BC944 /* Splash */,
 				E9BAB8182AFA572500B80410 /* Records */,
 				E9BAB8172AFA570F00B80410 /* Calender */,
 				E9BAB8162AFA559500B80410 /* Main */,
 				E9BAB8152AFA558C00B80410 /* Tabbar */,
-				E9DC50162AFCDEA000E2083C /* Cell */,
 				E93767942AFF9BA7004DD5A6 /* Common */,
 			);
 			path = Screens;
@@ -188,6 +203,27 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
+		E9A22A912B08CA10000BC944 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				E9A22A962B09EAD2000BC944 /* Cell */,
+				E9A22A922B08CA4C000BC944 /* FirstCreateViewController.swift */,
+				E9A22AA12B0A215C000BC944 /* SecondCreateViewController.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		E9A22A962B09EAD2000BC944 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E9A22A992B0A1ADA000BC944 /* FirstCreateCVHeader.swift */,
+				E9A22A972B09EB85000BC944 /* FirstCreateCollectionViewCell.swift */,
+				E9A22A9D2B0A213D000BC944 /* SecondCeateCollectionReusableView.swift */,
+				E9A22A9F2B0A214F000BC944 /* SecondCreateCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		E9A98FC62AF7A6B20024F77B = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +263,7 @@
 		E9BAB8162AFA559500B80410 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				E9DC50162AFCDEA000E2083C /* Cell */,
 				E9BAB81A2AFA577800B80410 /* MainViewController.swift */,
 				E9DC50142AFCDE6B00E2083C /* MainViewModel.swift */,
 			);
@@ -350,21 +387,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9A22AA02B0A214F000BC944 /* SecondCreateCollectionViewCell.swift in Sources */,
 				E9DC50182AFCDEC600E2083C /* MainTableViewCell.swift in Sources */,
 				E981430C2AF92B67008C3285 /* DataModel.swift in Sources */,
+				E9A22A9E2B0A213D000BC944 /* SecondCeateCollectionReusableView.swift in Sources */,
+				E9A22AA22B0A215C000BC944 /* SecondCreateViewController.swift in Sources */,
 				E9DC50152AFCDE6B00E2083C /* MainViewModel.swift in Sources */,
 				E9A98FD72AF7A6B20024F77B /* TabbarViewController.swift in Sources */,
 				E9DC501A2AFCF03700E2083C /* MainTableViewHeaderView.swift in Sources */,
 				E93767962AFF9BBB004DD5A6 /* EmptyTableViewCell.swift in Sources */,
+				E9A22A9A2B0A1ADA000BC944 /* FirstCreateCVHeader.swift in Sources */,
 				E93767932AFF932D004DD5A6 /* MoreTableViewCell.swift in Sources */,
 				E9A98FD32AF7A6B20024F77B /* AppDelegate.swift in Sources */,
 				E9BAB8212AFA597100B80410 /* DesignSystem.swift in Sources */,
 				E91F94BC2B04E36A008B4D9A /* CalendarCollectionViewCell.swift in Sources */,
 				E9BAB81B2AFA577800B80410 /* MainViewController.swift in Sources */,
+				E9A22A982B09EB85000BC944 /* FirstCreateCollectionViewCell.swift in Sources */,
 				E9BAB81D2AFA578300B80410 /* CalenderViewController.swift in Sources */,
 				E9A98FD52AF7A6B20024F77B /* SceneDelegate.swift in Sources */,
 				E98143082AF92A6C008C3285 /* Extension.swift in Sources */,
 				E9BAB81F2AFA578C00B80410 /* RecordsViewController.swift in Sources */,
+				E9A22A932B08CA4C000BC944 /* FirstCreateViewController.swift in Sources */,
+				E9A22A952B08CAC3000BC944 /* NaviView.swift in Sources */,
 				E9A22A902B076B7B000BC944 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

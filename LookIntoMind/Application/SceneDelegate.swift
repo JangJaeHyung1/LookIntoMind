@@ -15,9 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let _ = (scene as? UIWindowScene) else { return }
-        let initialViewController = SplashViewController()
-        // rootViewController 설정하기
-        self.window?.rootViewController = initialViewController
+        let rootVC = FirstCreateViewController(loadData: nil)
+        self.window?.rootViewController = rootVC
         self.window?.makeKeyAndVisible()
         
         guard let _ = (scene as? UIWindowScene) else { return }

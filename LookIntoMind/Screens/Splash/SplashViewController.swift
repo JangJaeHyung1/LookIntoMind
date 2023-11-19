@@ -13,11 +13,9 @@ class SplashViewController: UIViewController {
 
     private let gifImage: GIFImageView = {
         let img = GIFImageView()
-        img.image = UIImage(named: "Splash")
         img.translatesAutoresizingMaskIntoConstraints = false
         img.isUserInteractionEnabled = true
         img.contentMode = .scaleAspectFit
-        //img.layer.masksToBounds = true
         return img
     }()
     override func viewDidLoad() {
@@ -30,7 +28,7 @@ class SplashViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         gifImage.animate(withGIFNamed: "Splash")
-        Timer.scheduledTimer(withTimeInterval: 1.6, repeats: false, block: {[weak self] timer in
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: {[weak self] timer in
             
             self?.gifImage.stopAnimatingGIF()
             self?.goMain()
