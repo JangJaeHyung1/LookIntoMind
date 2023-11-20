@@ -95,6 +95,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E92E867F2B0BA541004F9045 /* FirstCreate */ = {
+			isa = PBXGroup;
+			children = (
+				E9A22A992B0A1ADA000BC944 /* FirstCreateCVHeader.swift */,
+				E9A22A972B09EB85000BC944 /* FirstCreateCollectionViewCell.swift */,
+			);
+			path = FirstCreate;
+			sourceTree = "<group>";
+		};
+		E92E86802B0BA548004F9045 /* SecondCreate */ = {
+			isa = PBXGroup;
+			children = (
+				E9A22A9D2B0A213D000BC944 /* SecondCeateCollectionReusableView.swift */,
+				E9A22A9F2B0A214F000BC944 /* SecondCreateCollectionViewCell.swift */,
+			);
+			path = SecondCreate;
+			sourceTree = "<group>";
+		};
 		E93767942AFF9BA7004DD5A6 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,10 +234,8 @@
 		E9A22A962B09EAD2000BC944 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				E9A22A992B0A1ADA000BC944 /* FirstCreateCVHeader.swift */,
-				E9A22A972B09EB85000BC944 /* FirstCreateCollectionViewCell.swift */,
-				E9A22A9D2B0A213D000BC944 /* SecondCeateCollectionReusableView.swift */,
-				E9A22A9F2B0A214F000BC944 /* SecondCreateCollectionViewCell.swift */,
+				E92E867F2B0BA541004F9045 /* FirstCreate */,
+				E92E86802B0BA548004F9045 /* SecondCreate */,
 			);
 			path = Cell;
 			sourceTree = "<group>";

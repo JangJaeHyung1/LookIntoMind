@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let _ = (scene as? UIWindowScene) else { return }
-        let rootVC = FirstCreateViewController(loadData: nil)
+        let rootVC = SecondCreateViewController(loadData: nil, mainCategory: MainCategory.wind)
         self.window?.rootViewController = rootVC
         self.window?.makeKeyAndVisible()
         
