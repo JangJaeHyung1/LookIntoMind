@@ -11,14 +11,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let _ = (scene as? UIWindowScene) else { return }
-        let rootVC = SecondCreateViewController(loadData: nil, mainCategory: MainCategory.wind)
-        self.window?.rootViewController = rootVC
-        self.window?.makeKeyAndVisible()
-        
+        if true {
+            let rootVC = SplashViewController()
+            self.window?.rootViewController = rootVC
+            self.window?.makeKeyAndVisible()
+        }
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 

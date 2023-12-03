@@ -12,7 +12,7 @@ import RxCocoa
 import SnapKit
 
 class SecondCreateViewController: UIViewController {
-
+    private let disposeBag = DisposeBag()
     var collectionView: UICollectionView!
     
     private let naviView: NaviView = {
@@ -61,20 +61,27 @@ class SecondCreateViewController: UIViewController {
     var loadData: DataModel?
     var selectedCategory: String? {
         didSet {
-            nextBtn.isEnabled = true
-            nextView.backgroundColor = .black
+            if selectedCategory != nil && selectedCategory?.count ?? 0 > 0 {
+                nextBtn.isEnabled = true
+                nextView.backgroundColor = .black
+                SaveData.subCategory = selectedCategory
+            }
         }
     }
     var subCategory: [String]
+    var todayDate: Date
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
     }
     
-    init(loadData: DataModel?, mainCategory: MainCategory) {
+    init(loadData: DataModel?, mainCategory: MainCategory, todayDate: Date) {
         self.loadData = loadData
+
         self.mainCategory = mainCategory
         self.subCategory = SubCategory.array[mainCategory]!
+        self.todayDate = todayDate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -111,6 +118,7 @@ extension SecondCreateViewController {
     }
     private func configure() {
         view.backgroundColor = BaseColor.gray7
+        self.selectedCategory = loadData?.subCategory
     }
     
     private func fetch() {
@@ -118,7 +126,26 @@ extension SecondCreateViewController {
     }
     
     private func bind() {
+        nextBtn.rx.tap
+            .subscribe(onNext:{ [weak self] res in
+                guard let self else { return }
+                if let selectedCategory {
+                    self.presentNextVC(loadData: loadData, mainCategory: mainCategory, subCategory: selectedCategory, todayDate: self.todayDate)
+                }
+            })
+            .disposed(by: disposeBag)
         
+        naviView.backBtn.rx.tap
+            .subscribe(onNext:{ [weak self] res in
+                guard let self else { return }
+                self.navigationController?.popViewController(animated: false)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func presentNextVC(loadData: DataModel?, mainCategory: MainCategory, subCategory: String, todayDate: Date) {
+        let nextVC = ThirdCreateViewController(loadData: loadData, mainCategory: mainCategory, subCategory: subCategory, todayDate: todayDate)
+        self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
     private func setNavi() {

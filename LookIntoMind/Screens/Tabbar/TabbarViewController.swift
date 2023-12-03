@@ -21,7 +21,7 @@ class TabbarViewController: UITabBarController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
-        self.selectedIndex = 0
+        self.selectedIndex = 1
         overrideUserInterfaceStyle = .light
     }
     
@@ -67,9 +67,9 @@ extension TabbarViewController {
     
     private func setTabBar(){
         
-        let vc1 = CalenderViewController()
+        let vc1 = CalendarViewController()
         let vc2 = MainViewController()
-        let vc3 = RecordsViewController()
+        let vc3 = StatisticsViewController()
         
         self.setViewControllers([vc1,vc2,vc3], animated: false)
         

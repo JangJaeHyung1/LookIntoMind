@@ -147,6 +147,11 @@ extension NSAttributedString {
     }
 }
 extension UIViewController {
+    func back(page: Int) {
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        self.navigationController!.popToViewController(viewControllers[viewControllers.count - page], animated: true)
+    }
+    
     func hideTextFieldKeyboardWhenTappedBackground() {
         let tapEvent = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapEvent.cancelsTouchesInView = false
@@ -244,8 +249,10 @@ extension Date {
   public var main: String {
     return toString("MM.dd EEEE")
   }
+    
+  // Realm Data key
   public var summary: String {
-    return toString("yyyy-MM-dd")
+    return toString("yyyy.MM.dd")
   }
     public var day: String {
         return toString("d")

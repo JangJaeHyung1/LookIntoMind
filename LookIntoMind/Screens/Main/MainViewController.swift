@@ -9,23 +9,14 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
-import Realm
+import RealmSwift
 
 
 class MainViewController: UIViewController {
-
+    private let disposeBag = DisposeBag()
+    let viewModel = MainViewModel()
     var tableView: UITableView!
-    var moreBtnIsHidden: Bool = false
-    var todayData: DataModel?
-    var recordData: [DataModel] = [
-        DataModel(date: Date(), category: .worry, subCategory: SubCategory.array[.worry]![0], content: "흠..1"),
-        DataModel(date: Date(), category: .wonder, subCategory: SubCategory.array[.wonder]![0], content: "흠..2"),
-        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.anger]![0], content: "흠..3"),
-        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.anger]![0], content: "흠..4"),
-        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.anger]![0], content: "흠..5"),
-        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.anger]![0], content: "흠..6"),
-        DataModel(date: Date(), category: .anger, subCategory: SubCategory.array[.anger]![0], content: "흠..7"),
-    ]
+   
     private let safeBGView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -34,14 +25,25 @@ class MainViewController: UIViewController {
         return view
     }()
     
+    private let loadDummyDataBtn: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("테스트 데이터 가져오기", for: .normal)
+        btn.setTitleColor(.systemBlue, for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 15)
+        btn.contentEdgeInsets = .init(top: 5, left: 5, bottom: 5, right: 5)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.adjustsImageWhenHighlighted = false
+        btn.isHidden = true
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-// 1. 데이터가 12개 미만이면 more Btn 비활성화
-// 2. 데이터가 12개 이상이면 more Btn 활성화
-// 3. 데이터가 12개 이상일때 more btn 이후 12개씩 불러오기
-// 4. 데이터가 더 불러올게 없으면 Fetch 하지않음
         setUp()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.input.fetchTempLoadAndTodayData.onNext(())
     }
     
     
@@ -59,7 +61,6 @@ extension MainViewController {
     private func setUp() {
         configure()
         setTableView()
-        setNavi()
         addViews()
         setConstraints()
         bind()
@@ -70,7 +71,7 @@ extension MainViewController {
     }
     
     private func fetch() {
-        
+        viewModel.input.firstFetch.onNext(())
     }
     
     private func setTableView(){
@@ -88,27 +89,49 @@ extension MainViewController {
     }
     
     private func bind() {
+        viewModel.output.loadDummyDataBtnIsHidden
+            .bind(to: loadDummyDataBtn.rx.isHidden)
+            .disposed(by: disposeBag)
         
-    }
-    
-    private func setNavi() {
-        //        self.navigationItem.title = "<#title#>"
-        //        self.navigationController?.navigationBar.prefersLargeTitles = true
-        //        self.navigationItem.largeTitleDisplayMode = .always
-        //        self.navigationItem.setHidesBackButton(true, animated: true)
-        //        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        //        self.navigationController?.navigationBar.isHidden = false
-        //        self.navigationController?.isNavigationBarHidden = true
+        viewModel.output.spinnerStart
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe(onNext:{ [weak self] res in
+                guard let self else { return }
+                tableView.tableFooterView = createSpinnerView()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.tableViewReloadData
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe(onNext:{ [weak self] res in
+                guard let self else { return }
+                self.tableView.tableFooterView = nil
+                self.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+        self.loadDummyDataBtn.rx.tap
+            .subscribe(onNext:{ [weak self] res in
+                guard let self else { return }
+                self.loadDummyDataBtn.isHidden = true
+                self.viewModel.loadDummyData()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func addViews() {
         view.addSubview(tableView)
+        view.addSubview(loadDummyDataBtn)
     }
     
     private func setConstraints() {
         tableView.snp.makeConstraints { make in
             make.leading.top.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+        }
+        loadDummyDataBtn.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-200)
+            make.centerX.equalToSuperview()
         }
     }
 }
@@ -123,13 +146,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            if recordData.isEmpty {
+            if viewModel.output.recordData.value.isEmpty {
                 return 1
             } else {
-                if !moreBtnIsHidden {
-                    return recordData.count + 1
+                if !viewModel.output.moreBtnIsHidden.value {
+                    return viewModel.output.recordData.value.count + 1
                 } else {
-                    return recordData.count
+                    return viewModel.output.recordData.value.count
                 }
             }
         }
@@ -137,28 +160,23 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // MARK: - 테이블뷰 셀
-        tableView.tableFooterView = nil
+        
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.cellId, for: indexPath) as! MainTableViewCell
-            cell.configure(with: self.todayData, idx: indexPath)
+            cell.configure(with: self.viewModel.output.todayData.value, idx: indexPath)
             return cell
         } else {
-            if recordData.isEmpty {
+            if viewModel.output.recordData.value.isEmpty {
                 let cell = tableView.dequeueReusableCell(withIdentifier: EmptyTableViewCell.cellId, for: indexPath) as! EmptyTableViewCell
                 return cell
             } else {
-                if !moreBtnIsHidden {
-                    if indexPath == tableView.lastIndexpath() {
-                        let cell = tableView.dequeueReusableCell(withIdentifier: MoreTableViewCell.cellId, for: indexPath) as! MoreTableViewCell
-                        return cell
-                    } else {
-                        let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.cellId, for: indexPath) as! MainTableViewCell
-                        cell.configure(with: recordData[indexPath.row], idx: indexPath)
-                        return cell
-                    }
+                // 더보기 버튼 눌렀을 때
+                if !viewModel.output.moreBtnIsHidden.value && indexPath == tableView.lastIndexpath() {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: MoreTableViewCell.cellId, for: indexPath) as! MoreTableViewCell
+                    return cell
                 } else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.cellId, for: indexPath) as! MainTableViewCell
-                    cell.configure(with: recordData[indexPath.row], idx: indexPath)
+                    cell.configure(with: viewModel.output.recordData.value[indexPath.row], idx: indexPath)
                     return cell
                 }
             }
@@ -193,37 +211,87 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if moreBtnIsHidden && indexPath.section == 1{
+        if viewModel.output.moreBtnIsHidden.value && indexPath.section == 1 {
             if indexPath == tableView.lastIndexpath() {
-                // fetch
-                tableView.tableFooterView = createSpinnerView()
-                recordData += recordData
-                tableView.reloadData()
+                viewModel.input.fetchNextPageData.onNext(())
             }
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            if todayData == nil {
+            if viewModel.output.todayData.value == nil {
                 // 일기쓰기
+                if viewModel.output.tempLoadData.value != nil {
+                    presentModal()
+                } else {
+                    presentCreateVC(loadData: nil, todayDate: self.viewModel.output.todayDate)
+                }
             } else {
                 // 일기보기
+                guard let todayData = viewModel.output.todayData.value else { return }
+                presentRecordVC(mainCategory: todayData.category, subCategory: todayData.subCategory, content: todayData.content, recordDate: todayData.date, backEnable: true)
             }
         } else {
-            if !recordData.isEmpty {
-                if tableView.lastIndexpath() == indexPath && !moreBtnIsHidden{
-                    print("tap 감정더보기")
-                    moreBtnIsHidden = true
-                    // fetch
-                    tableView.tableFooterView = createSpinnerView()
-                    recordData += recordData
-                    tableView.reloadData()
+            if !viewModel.output.recordData.value.isEmpty {
+                if tableView.lastIndexpath() == indexPath && !viewModel.output.moreBtnIsHidden.value {
+                    viewModel.input.tapMoreBtn.onNext(())
                 } else {
                     // 일기보기
+                    let data = viewModel.output.recordData.value[indexPath.row]
+                    presentRecordVC(mainCategory: data.category, subCategory: data.subCategory, content: data.content, recordDate: data.date, backEnable: true)
                 }
             }
         }
+    }
+    
+    private func presentModal() {
+        let sheet = UIAlertController(title: "작성 중인 일기가 있어요", message: "이어서 작성하시겠어요?", preferredStyle: .alert)
+
+        let leftAlert = UIAlertAction(title: "새로 쓰기", style: .destructive, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.viewModel.output.tempLoadData.accept(nil)
+            Task {
+                try RealmAPI.shared.deleteTemp()
+                self.presentCreateVC(loadData: nil, todayDate: self.viewModel.output.todayDate)
+            }
+        })
+        let rightAlert = UIAlertAction(title: "이어서 쓰기", style: .default, handler: { _ in
+            self.presentCreateVC(loadData: self.viewModel.output.tempLoadData.value, todayDate: self.viewModel.output.todayDate)
+        })
+        
+        leftAlert.setValue(BaseColor.gray3, forKey: "titleTextColor")
+        rightAlert.setValue(BaseColor.black, forKey: "titleTextColor")
+        sheet.addAction(leftAlert)
+        sheet.addAction(rightAlert)
+
+        present(sheet, animated: true)
+    }
+}
+
+// MARK: - naviagtion
+
+extension MainViewController {
+    func presentRecordVC(mainCategory: MainCategory, subCategory: String, content: String, recordDate: Date, backEnable: Bool) {
+        let nextVC = RecordsViewController(mainCategory: mainCategory, subCategory: subCategory, content: content, recordDate: self.viewModel.output.todayDate, backEnable: backEnable)
+        if backEnable {
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        } else {
+            nextVC.modalPresentationStyle = .fullScreen
+            self.present(nextVC, animated: true)
+        }
+    }
+    func presentCreateVC(loadData: DataModel?, todayDate: Date) {
+        let nextVC = FirstCreateViewController(loadData: loadData, todayDate: self.viewModel.output.todayDate)
+        removeTempSaveData()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    func removeTempSaveData() {
+        SaveData.date = nil
+        SaveData.category = nil
+        SaveData.subCategory = nil
+        SaveData.content = nil
     }
     
 }

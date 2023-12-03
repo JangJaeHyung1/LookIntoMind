@@ -11,8 +11,7 @@ import RxCocoa
 import SnapKit
 import FSCalendar
 
-class CalenderViewController: UIViewController {
-
+class CalendarViewController: UIViewController {
     private let leftBtn: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "arrow_left"), for: .normal)
@@ -44,23 +43,23 @@ class CalenderViewController: UIViewController {
     let calendarCurrent = Calendar.current
     let today: Date = Date()
     var dateComponents = DateComponents()
-    var records: [DataModel] = [
-        .init(date: Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 01))!, category: .affection, subCategory: SubCategory.array[.anger]![0], content: "오늘의 일기1"),
-        .init(date: Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 02))!, category: .worry, subCategory: SubCategory.array[.anger]![0], content: "오늘의 일기2"),
-        .init(date: Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 04))!, category: .anger, subCategory: SubCategory.array[.anger]![0], content: "오늘의 일기3"),
-        .init(date: Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 06))!, category: .discomfort, subCategory: SubCategory.array[.anger]![0], content: "오늘의 일기4"),
-        .init(date: Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 07))!, category: .boredom, subCategory: SubCategory.array[.anger]![0], content: "오늘의 일기5"),
-        .init(date: Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 10))!, category: .fear, subCategory: SubCategory.array[.anger]![0], content: "오늘의 일기6"),
-        .init(date: Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 14))!, category: .embarrassment, subCategory: SubCategory.array[.anger]![0], content: "오늘의 일기7"),
-        .init(date: Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 15))!, category: .pleasure, subCategory: SubCategory.array[.anger]![0], content: "오늘의 일기8"),
-        .init(date: Calendar.current.date(from: DateComponents(year: 2023, month: 11, day: 16))!, category: .pleasure, subCategory: SubCategory.array[.anger]![0], content: "오늘의 일기9"),
-    ]
+    var records: [DataModel] = [] {
+        didSet {
+            
+        }
+    }
     
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        if self.records.count != LoadData.items.count {
+            self.records = LoadData.items
+            calendarView.reloadData()
+        }
     }
     
     init() {
@@ -72,18 +71,13 @@ class CalenderViewController: UIViewController {
     }
 
 }
-extension CalenderViewController {
+extension CalendarViewController {
     private func setUp() {
         configure()
         setCalendar()
-        setNavi()
         addViews()
         setConstraints()
         bind()
-        fetch()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         setCalendar()
     }
     
@@ -94,12 +88,6 @@ extension CalenderViewController {
         calendarView.dataSource = self
     }
     
-    private func fetch() {
-        
-    }
-    
-    
-    
     private func bind() {
         leftBtn.rx.tap
             .subscribe(onNext:{ [weak self] res in
@@ -107,24 +95,13 @@ extension CalenderViewController {
                 self.moveCurrentPage(moveUp: false)
             })
             .disposed(by: disposeBag)
+        
         rightBtn.rx.tap
             .subscribe(onNext:{ [weak self] res in
                 guard let self else { return }
                 self.moveCurrentPage(moveUp: true)
             })
             .disposed(by: disposeBag)
-        
-        
-    }
-    
-    private func setNavi() {
-        //        self.navigationItem.title = "<#title#>"
-        //        self.navigationController?.navigationBar.prefersLargeTitles = true
-        //        self.navigationItem.largeTitleDisplayMode = .always
-        //        self.navigationItem.setHidesBackButton(true, animated: true)
-        //        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        //        self.navigationController?.navigationBar.isHidden = false
-        //        self.navigationController?.isNavigationBarHidden = true
     }
     
     private func addViews() {
@@ -154,7 +131,7 @@ extension CalenderViewController {
     }
 }
 
-extension CalenderViewController: FSCalendarDelegate, FSCalendarDataSource, UICollectionViewDelegateFlowLayout {
+extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UICollectionViewDelegateFlowLayout {
     
     private func moveCurrentPage(moveUp: Bool) {
         
@@ -189,7 +166,7 @@ extension CalenderViewController: FSCalendarDelegate, FSCalendarDataSource, UICo
         calendarView.appearance.titleFont = BaseFont.body2_num
         
         calendarView.placeholderType = .none
-     
+        calendarView.reloadData()
     }
     
     func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
@@ -203,6 +180,23 @@ extension CalenderViewController: FSCalendarDelegate, FSCalendarDataSource, UICo
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         // 캘린더를 스와이프해서 이전/다음 달로 넘길 때,
         // 타이틀뷰에 있는 레이블 값을 바꿔준다 (October)
-        calendarView.reloadData()
+//        calendarView.reloadData()
+    }
+    
+    func presentRecordVC(mainCategory: MainCategory, subCategory: String, content: String, recordDate: Date, backEnable: Bool) {
+        let nextVC = RecordsViewController(mainCategory: mainCategory, subCategory: subCategory, content: content, recordDate: recordDate, backEnable: backEnable)
+        if backEnable {
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        } else {
+            nextVC.modalPresentationStyle = .fullScreen
+            self.present(nextVC, animated: true)
+        }
+    }
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+    
+        guard let selectedData = records.filter({$0.date.summary == date.summary}).first else {
+            return
+        }
+        presentRecordVC(mainCategory: selectedData.category, subCategory: selectedData.subCategory, content: selectedData.content, recordDate: date, backEnable: false)
     }
 }

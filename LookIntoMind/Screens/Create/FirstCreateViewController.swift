@@ -9,9 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SnapKit
+import RealmSwift
 
 class FirstCreateViewController: UIViewController {
-
+    private let disposeBag = DisposeBag()
     var collectionView: UICollectionView!
     
     private let naviView: NaviView = {
@@ -56,12 +57,19 @@ class FirstCreateViewController: UIViewController {
         btn.adjustsImageWhenHighlighted = false
         return btn
     }()
-    
+    var todayDate: Date
     var loadData: DataModel?
     var selectedCategory: MainCategory? {
         didSet {
-            nextBtn.isEnabled = true
-            nextView.backgroundColor = .black
+            if selectedCategory != nil {
+                nextBtn.isEnabled = true
+                nextView.backgroundColor = .black
+                SaveData.category = selectedCategory
+                if loadData?.category != selectedCategory {
+                    SaveData.subCategory = nil
+                    loadData?.subCategory = ""
+                }
+            }
         }
     }
     var category: [String] = [
@@ -95,8 +103,9 @@ class FirstCreateViewController: UIViewController {
         setUp()
     }
     
-    init(loadData: DataModel?) {
+    init(loadData: DataModel?, todayDate: Date) {
         self.loadData = loadData
+        self.todayDate = todayDate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -133,6 +142,8 @@ extension FirstCreateViewController {
     }
     private func configure() {
         view.backgroundColor = BaseColor.gray7
+        SaveData.date = Date()
+        self.selectedCategory = loadData?.category
     }
     
     private func fetch() {
@@ -140,10 +151,64 @@ extension FirstCreateViewController {
     }
     
     private func bind() {
+        nextBtn.rx.tap
+            .subscribe(onNext:{ [weak self] res in
+                guard let self else { return }
+                if let mainCategory = selectedCategory {
+                    self.presentNextVC(loadData: loadData, mainCategory: mainCategory, todayDate: self.todayDate)
+                }
+            })
+            .disposed(by: disposeBag)
         
+        naviView.backBtn.rx.tap
+            .subscribe(onNext:{ [weak self] res in
+                guard let self else { return }
+                // 모달 띄우기
+                
+                if selectedCategory != nil {
+                    self.presentModal()
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func presentModal() {
+        let sheet = UIAlertController(title: "일기를 임시저장하시겠어요?", message: nil, preferredStyle: .alert)
+
+        let leftAlert = UIAlertAction(title: "저장안함", style: .destructive, handler: {[weak self] _ in
+            guard let self = self else { return }
+            Task {
+                _ = try RealmAPI.shared.deleteTemp()
+                self.navigationController?.popViewController(animated: true)
+            }
+        })
+        let rightAlert = UIAlertAction(title: "이어서 쓰기", style: .default, handler: {[weak self] _ in
+            guard let self = self else { return }
+            Task {
+                guard let date = SaveData.date, let mainCategory = SaveData.category else { return }
+                try RealmAPI.shared.tempSave(item: SaveDataModel(date: date, category: mainCategory, subCategory: SaveData.subCategory, content: SaveData.content))
+                self.navigationController?.popViewController(animated: true)
+            }
+        })
+        
+        leftAlert.setValue(BaseColor.gray3, forKey: "titleTextColor")
+        rightAlert.setValue(BaseColor.black, forKey: "titleTextColor")
+        sheet.addAction(leftAlert)
+        sheet.addAction(rightAlert)
+
+        present(sheet, animated: true)
     }
     
     private func setNavi() {
+        
+    }
+    
+    func presentNextVC(loadData: DataModel?, mainCategory: MainCategory, todayDate: Date) {
+        let nextVC = SecondCreateViewController(loadData: loadData, mainCategory: mainCategory, todayDate: todayDate)
+        self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
     private func addViews() {

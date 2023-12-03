@@ -24,7 +24,7 @@ class NaviView: UIView {
         view.backgroundColor = BaseColor.gray7
         return view
     }()
-    private let progressBGView: UIView = {
+    let progressBGView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = true
@@ -39,23 +39,36 @@ class NaviView: UIView {
         
         return view
     }()
-    private let backImage: UIImageView = {
-        let img = UIImageView()
-        img.image = UIImage(named: "arrow_back")
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.isUserInteractionEnabled = true
-        img.contentMode = .scaleAspectFit
-        return img
-    }()
+    
     let backBtn: UIButton = {
         let btn = UIButton()
+        let img = UIImage(named: "arrow_back")
+        btn.setImage(img, for: .normal)
         btn.contentEdgeInsets = .init(top: 5, left: 5, bottom: 5, right: 5)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.adjustsImageWhenHighlighted = false
         return btn
     }()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    
+    
+    let dismissBtn: UIButton = {
+        let btn = UIButton()
+        let img = UIImage(named: "dismiss")
+        btn.setImage(img, for: .normal)
+        btn.contentEdgeInsets = .init(top: 5, left: 5, bottom: 5, right: 5)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.adjustsImageWhenHighlighted = false
+        return btn
+    }()
+    
+    
+    init(backBtnEnable: Bool = true) {
+        if backBtnEnable {
+            dismissBtn.isHidden = true
+        } else {
+            backBtn.isHidden = true
+        }
+        super.init(frame: .zero)
         setupView()
     }
     
@@ -66,8 +79,8 @@ class NaviView: UIView {
     private func setupView() {
         addSubview(safeView)
         addSubview(naviView)
-        naviView.addSubview(backImage)
         naviView.addSubview(backBtn)
+        naviView.addSubview(dismissBtn)
         
         addSubview(progressBGView)
         progressBGView.addSubview(progressView)
@@ -88,16 +101,17 @@ class NaviView: UIView {
             make.height.equalTo(44)
         }
         
-        backImage.snp.makeConstraints { make in
-            make.width.equalTo(30)
-            make.height.equalTo(24)
-            make.leading.equalToSuperview().offset(20)
-            make.bottom.equalToSuperview().offset(-10)
+        backBtn.snp.makeConstraints { make in
+            make.width.equalTo(40)
+            make.height.equalTo(34)
+            make.leading.equalToSuperview().offset(15)
+            make.bottom.equalToSuperview().offset(-5)
         }
         
-        backBtn.snp.makeConstraints { make in
-            make.width.height.equalTo(backImage).offset(20)
-            make.center.equalTo(backImage)
+        dismissBtn.snp.makeConstraints { make in
+            make.width.height.equalTo(34)
+            make.centerY.equalTo(backBtn)
+            make.trailing.equalToSuperview().offset(-15)
         }
         
         progressBGView.snp.makeConstraints { make in

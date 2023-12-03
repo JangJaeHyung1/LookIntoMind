@@ -64,6 +64,7 @@ class MainTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        emotionImageView.image = nil
     }
     
     override func layoutIfNeeded() {
@@ -109,6 +110,7 @@ class MainTableViewCell: UITableViewCell {
         }
     }
     func configure(with presentable: DataModel?, idx: IndexPath) {
+        emotionImageView.image = nil
         guard let presentable = presentable else {
             titleLbl.text = "마음 들여다보기"
             cellView.backgroundColor = BaseColor.black
@@ -122,6 +124,5 @@ class MainTableViewCell: UITableViewCell {
         titleLbl.textColor = BaseColor.black
         emotionImageView.image = UIImage(named: presentable.category.rawValue)
         dateLbl.text = presentable.date.toString(presentable.date.main)
-        
     }
 }

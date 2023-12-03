@@ -10,7 +10,6 @@ import Gifu
 import SnapKit
 
 class SplashViewController: UIViewController {
-
     private let gifImage: GIFImageView = {
         let img = GIFImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
@@ -28,8 +27,8 @@ class SplashViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         gifImage.animate(withGIFNamed: "Splash")
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: {[weak self] timer in
-            
+        Timer.scheduledTimer(withTimeInterval: 1.6, repeats: false, block: {[weak self] timer in
+            // todo 0.1 -> 1.6s
             self?.gifImage.stopAnimatingGIF()
             self?.goMain()
         })
@@ -38,7 +37,9 @@ class SplashViewController: UIViewController {
     func goMain() {
         let Storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         guard let VC = Storyboard.instantiateViewController(identifier: "Main") as? TabbarViewController else { return }
-        VC.modalPresentationStyle = .fullScreen
-        self.present(VC, animated: false, completion: nil)
+        let navigationController = UINavigationController(rootViewController: VC)
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: false, completion: nil)
+        
     }
 }

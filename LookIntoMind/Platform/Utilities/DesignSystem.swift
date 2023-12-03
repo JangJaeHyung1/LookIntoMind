@@ -23,6 +23,7 @@ struct BaseColor {
 
 struct BaseFont {
     static let title1 = UIFont.customFont(ofSize: 24, weight: .bold, lineHeight: 36)
+    static let title1_sub = UIFont.customFont(ofSize: 21, weight: .bold, lineHeight: 30)
     static let title2 = UIFont.customFont(ofSize: 16, weight: .bold, lineHeight: 24)
     static let title2_num = UIFont.customFont(ofSize: 16, weight: .bold, lineHeight: 24)
     
