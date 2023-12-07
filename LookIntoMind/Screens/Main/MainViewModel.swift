@@ -43,12 +43,6 @@ class MainViewModel {
     }
     private func transform(){
         
-        output.moreBtnIsHidden
-            .subscribe(onNext:{ [weak self] res in
-                guard let self else { return }
-                print("output.moreBtnIsHidden res : \(res)")
-            })
-            .disposed(by: disposeBag)
         input.fetchNextPageData
             .subscribe(onNext:{ [weak self] res in
                 guard let self else { return }

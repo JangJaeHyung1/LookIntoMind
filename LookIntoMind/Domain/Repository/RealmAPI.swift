@@ -109,6 +109,7 @@ class RealmAPI {
         do {
             let items = try RealmAPI.shared.load()
             LoadData.items = items
+            saveMonthRecordData(items: items)
             if let item = items.filter({ $0.date.toString($0.date.summary) == Date().toString(Date().summary)}).first {
                 let todayData = DataModel(date: item.date, category: item.category, subCategory: item.subCategory, content: item.content)
                 debugPrint("🔵 Realm API loadToday success")
@@ -121,6 +122,54 @@ class RealmAPI {
             print("❌ Realm API loadToday error: \(error.localizedDescription)")
             throw error
         }
+    }
+    
+    private func saveMonthRecordData(items: [DataModel]){
+        var categoryDict: [MainCategory: Int] = [:]
+        var previousMonth = ""
+        for item in items {
+            let month = item.date.month
+            if previousMonth != month {
+                previousMonth = month
+                categoryDict = [:]
+            }
+            if let monthDict = MonthRecords.dict[month] {
+                // 해당 month의 데이터가 있을때
+                if let count = monthDict[item.category] {
+                    categoryDict.updateValue(count + 1, forKey: item.category)
+                } else {
+                    // 해당 category의 아이템이 없으면 category = 1
+                    categoryDict.updateValue(1, forKey: item.category)
+                }
+            } else {
+                // 해당 month의 데이터가 없을때 dictionary 객체 생성
+                // 해당 category count = 1
+                for category in MainCategory.allCases {
+                    categoryDict.updateValue(category == item.category ? 1 : 0, forKey: category)
+                }
+            }
+            MonthRecords.dict.updateValue(categoryDict, forKey: month)
+        }
+        
+        // 최신순 정렬
+        var monthKeys: [String] = []
+        for month in MonthRecords.dict.keys.sorted().reversed() {
+            monthKeys.append(month)
+        }
+        
+        // 백분율로 변환
+        for monthKey in monthKeys {
+            guard let monthRecordDict = MonthRecords.dict[monthKey] else { return }
+            let sum = (monthRecordDict.values).reduce(0, +)
+            var newMonthCategoryDict: [MainCategory: Int] = monthRecordDict
+            for categoryKey in monthRecordDict.keys {
+                guard let categoryCount = monthRecordDict[categoryKey] else { return }
+                let newValue = Int(ceil((Double(categoryCount)/Double(sum)) * 100))
+                newMonthCategoryDict.updateValue(newValue, forKey: categoryKey)
+            }
+            MonthRecords.dict.updateValue(newMonthCategoryDict, forKey: monthKey)
+        }
+        
     }
     
 }

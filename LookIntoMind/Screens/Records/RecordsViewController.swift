@@ -112,7 +112,7 @@ extension RecordsViewController {
     }
     private func configure() {
         view.backgroundColor = .white
-        dateLbl.text = recordDate.toString(recordDate.summary)
+        dateLbl.text = recordDate.summary
     }
     
     private func fetch() {

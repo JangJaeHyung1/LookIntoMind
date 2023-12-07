@@ -257,6 +257,10 @@ extension Date {
     public var day: String {
         return toString("d")
     }
+    
+    public var month: String {
+        return toString("yyyy.MM")
+    }
   
   // MARK: - 요일 포함 날짜 표시
   public var basicWithDay: String {

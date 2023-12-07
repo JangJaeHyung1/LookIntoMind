@@ -16,6 +16,7 @@
 		E968D0362B15AF37005E4F63 /* RealmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968D0352B15AF37005E4F63 /* RealmAPI.swift */; };
 		E968D0382B15B311005E4F63 /* SaveDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968D0372B15B311005E4F63 /* SaveDataModel.swift */; };
 		E968D03A2B15C58B005E4F63 /* LoadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968D0392B15C58B005E4F63 /* LoadData.swift */; };
+		E96C44392B20D9E70094742A /* MonthRecordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96C44382B20D9E70094742A /* MonthRecordData.swift */; };
 		E97AAE8A2B02521900EC60B0 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = E97AAE892B02521900EC60B0 /* FSCalendar */; };
 		E98143082AF92A6C008C3285 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98143072AF92A6C008C3285 /* Extension.swift */; };
 		E981430C2AF92B67008C3285 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E981430B2AF92B67008C3285 /* DataModel.swift */; };
@@ -63,6 +64,7 @@
 		E968D0352B15AF37005E4F63 /* RealmAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAPI.swift; sourceTree = "<group>"; };
 		E968D0372B15B311005E4F63 /* SaveDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDataModel.swift; sourceTree = "<group>"; };
 		E968D0392B15C58B005E4F63 /* LoadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadData.swift; sourceTree = "<group>"; };
+		E96C44382B20D9E70094742A /* MonthRecordData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthRecordData.swift; sourceTree = "<group>"; };
 		E98143072AF92A6C008C3285 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		E981430B2AF92B67008C3285 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		E9902CC22B0F766E002BD2F7 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				E981430B2AF92B67008C3285 /* DataModel.swift */,
 				E9E120022B1329EF0067800A /* RealmDataModel.swift */,
 				E968D0372B15B311005E4F63 /* SaveDataModel.swift */,
+				E96C44382B20D9E70094742A /* MonthRecordData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				E91F94BC2B04E36A008B4D9A /* CalendarCollectionViewCell.swift in Sources */,
 				E9BAB81B2AFA577800B80410 /* MainViewController.swift in Sources */,
 				E9A22A982B09EB85000BC944 /* FirstCreateCollectionViewCell.swift in Sources */,
+				E96C44392B20D9E70094742A /* MonthRecordData.swift in Sources */,
 				E9BAB81D2AFA578300B80410 /* CalendarViewController.swift in Sources */,
 				E9A98FD52AF7A6B20024F77B /* SceneDelegate.swift in Sources */,
 				E98143082AF92A6C008C3285 /* Extension.swift in Sources */,
@@ -633,6 +637,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ggasoon2.LookIntoMind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -663,6 +668,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ggasoon2.LookIntoMind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

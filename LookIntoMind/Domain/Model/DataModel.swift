@@ -14,7 +14,7 @@ struct DataModel {
     var content: String
 }
 
-enum MainCategory: String {
+enum MainCategory: String, CaseIterable {
     case wonder = "경이"
     case pleasure = "기쁨"
     case sympathy = "동정"

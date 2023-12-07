@@ -15,6 +15,9 @@ struct TodayLoadData {
     static var items: [DataModel] = []
 }
 
+struct MonthRecords {
+    static var dict: [String: [MainCategory: Int]] = [:]
+}
 
 struct Dummy {
     static var data: [DataModel] =

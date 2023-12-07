@@ -273,7 +273,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MainViewController {
     func presentRecordVC(mainCategory: MainCategory, subCategory: String, content: String, recordDate: Date, backEnable: Bool) {
-        let nextVC = RecordsViewController(mainCategory: mainCategory, subCategory: subCategory, content: content, recordDate: self.viewModel.output.todayDate, backEnable: backEnable)
+        let nextVC = RecordsViewController(mainCategory: mainCategory, subCategory: subCategory, content: content, recordDate: recordDate, backEnable: backEnable)
         if backEnable {
             self.navigationController?.pushViewController(nextVC, animated: true)
         } else {

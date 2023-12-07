@@ -64,8 +64,10 @@ class FirstCreateViewController: UIViewController {
             if selectedCategory != nil {
                 nextBtn.isEnabled = true
                 nextView.backgroundColor = .black
+                // 임시 저장할 데이터 저장하기
                 SaveData.category = selectedCategory
                 if loadData?.category != selectedCategory {
+                    // 임시 저장된 데이터 초기화
                     SaveData.subCategory = nil
                     loadData?.subCategory = ""
                 }

@@ -41,6 +41,7 @@ class CalendarCollectionViewCell: FSCalendarCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.backImageView.image = nil
         disposeBag = DisposeBag()
     }
     
@@ -80,8 +81,8 @@ class CalendarCollectionViewCell: FSCalendarCell {
     func configure(with presentables: [DataModel], date: Date) {
         dateLbl.text = date.toString(date.day)
         dateLbl.font = BaseFont.body2_num
-        let isToday = Date().toString(Date().summary) == date.toString(date.summary)
-        let record = presentables.filter({$0.date.toString($0.date.summary) == date.toString(date.summary)}).first
+        let isToday = Date().summary == date.summary
+        let record = presentables.filter({$0.date.summary == date.summary}).first
         if let presentable = record {
             if isToday {
                 backImageView.image = UIImage(named: presentable.category.rawValue)?.withRenderingMode(.alwaysTemplate)
