@@ -28,7 +28,7 @@ class RealmAPI {
                 debugPrint("🔵 Realm API deleteTemp success")
             }
         } catch {
-            print("❌ Realm API deleteTemp error: \(error.localizedDescription)")
+            debugPrint("❌ Realm API deleteTemp error: \(error.localizedDescription)")
         }
     }
     
@@ -45,7 +45,7 @@ class RealmAPI {
                 debugPrint("🔵 Realm API tempSave success")
             }
         } catch {
-            print("❌ Realm API temp save error: \(error.localizedDescription)")
+            debugPrint("❌ Realm API temp save error: \(error.localizedDescription)")
             return false
         }
         return true
@@ -63,7 +63,7 @@ class RealmAPI {
             debugPrint("🔵 Realm API tempLoad success : \(data)")
             return data
         } catch {
-            print("❌ Realm API tempLoad error: \(error.localizedDescription)")
+            debugPrint("❌ Realm API tempLoad error: \(error.localizedDescription)")
             throw error
         }
     }
@@ -78,7 +78,7 @@ class RealmAPI {
                 debugPrint("🔵 Realm API save success")
             }
         } catch {
-            print("❌ Realm API save error: \(error.localizedDescription)")
+            debugPrint("❌ Realm API save error: \(error.localizedDescription)")
             return false
         }
         return true
@@ -100,7 +100,7 @@ class RealmAPI {
 //            debugPrint("🔵 Realm API load success : \(data)")
             return data
         } catch {
-            print("❌ Realm API load error: \(error.localizedDescription)")
+            debugPrint("❌ Realm API load error: \(error.localizedDescription)")
             throw error
         }
     }
@@ -119,12 +119,13 @@ class RealmAPI {
                 throw ErrorType.RealmTodayDataNil
             }
         } catch {
-            print("❌ Realm API loadToday error: \(error.localizedDescription)")
+            debugPrint("❌ Realm API loadToday error: \(error.localizedDescription)")
             throw error
         }
     }
     
     private func saveMonthRecordData(items: [DataModel]){
+        MonthRecords.dict.removeAll()
         var categoryDict: [MainCategory: Int] = [:]
         var previousMonth = ""
         for item in items {

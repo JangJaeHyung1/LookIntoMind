@@ -105,12 +105,13 @@ class StatisticsCommonTableViewCell: UITableViewCell {
         cellView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalToSuperview().offset(16)
+            make.height.equalTo(40)
         }
         
         categoryImageView.snp.makeConstraints { make in
             make.width.height.equalTo(40)
             make.leading.equalToSuperview()
-            make.top.bottom.equalToSuperview()
+            make.centerY.equalToSuperview()
         }
         
         categoryLbl.snp.makeConstraints { make in

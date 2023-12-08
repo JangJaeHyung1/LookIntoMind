@@ -55,7 +55,9 @@ class StatisticsTableViewCell: UITableViewCell {
             tableView.snp.updateConstraints { make in
                 make.height.equalTo((16 + 40) * count)
             }
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
 
@@ -94,6 +96,8 @@ class StatisticsTableViewCell: UITableViewCell {
         tableView.register(StatisticsCommonTableViewCell.self, forCellReuseIdentifier: StatisticsCommonTableViewCell.cellId)
         tableView.backgroundColor = .white
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = UITableView.automaticDimension
     }
     private func setupView() {
         contentView.addSubview(cellView)
@@ -128,7 +132,7 @@ class StatisticsTableViewCell: UITableViewCell {
         }
         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(nextBtn.snp.bottom).offset(8)
+            make.top.equalTo(nextBtn.snp.bottom).offset(3)
             make.bottom.equalToSuperview().offset(-24)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
@@ -154,10 +158,5 @@ extension StatisticsTableViewCell: UITableViewDelegate, UITableViewDataSource {
         let percent: Int = sortedDictionary[indexPath.row].value
         cell.configure(with: category, percent: percent, max: sortedDictionary[0].value)
         return cell
-    }
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
     }
 }

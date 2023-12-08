@@ -56,6 +56,12 @@ class StatisticsViewController: UIViewController {
         super.viewDidLoad()
         setUp()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }
 
 
