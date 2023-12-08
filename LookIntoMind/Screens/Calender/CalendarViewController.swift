@@ -17,7 +17,6 @@ class CalendarViewController: UIViewController {
         btn.setImage(UIImage(named: "arrow_left"), for: .normal)
         btn.contentEdgeInsets = .init(top: 10, left: 10, bottom: 10, right: 10)
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.adjustsImageWhenHighlighted = false
         btn.imageView?.contentMode = .scaleAspectFit
         return btn
     }()
@@ -27,7 +26,6 @@ class CalendarViewController: UIViewController {
         btn.setImage(UIImage(named: "arrow_right"), for: .normal)
         btn.contentEdgeInsets = .init(top: 10, left: 10, bottom: 10, right: 10)
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.adjustsImageWhenHighlighted = false
         btn.imageView?.contentMode = .scaleAspectFit
         return btn
     }()
@@ -37,6 +35,17 @@ class CalendarViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = true
         return view
+    }()
+    
+    private let titleLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.textColor = BaseColor.black
+        lbl.font = BaseFont.title2_num
+        lbl.text = "2023.11"
+        lbl.lineBreakMode = .byWordWrapping
+        lbl.isUserInteractionEnabled = true
+        return lbl
     }()
     
     var currentPage: Date?
@@ -108,6 +117,7 @@ extension CalendarViewController {
         view.addSubview(calendarView)
         view.addSubview(rightBtn)
         view.addSubview(leftBtn)
+        view.addSubview(titleLbl)
     }
     
     private func setConstraints() {
@@ -127,7 +137,10 @@ extension CalendarViewController {
             make.centerX.equalTo(calendarView.calendarHeaderView).offset(52)
             make.centerY.equalTo(leftBtn)
         }
-        
+        titleLbl.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(leftBtn)
+        }
     }
 }
 
@@ -148,7 +161,8 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UICo
         calendarView.headerHeight = 66
         
         calendarView.appearance.headerMinimumDissolvedAlpha = 0.0
-        calendarView.appearance.headerDateFormat = "YYYY.MM"
+//        calendarView.appearance.headerDateFormat = "YYYY.MM"
+        calendarView.appearance.headerDateFormat = ""
         calendarView.appearance.headerTitleColor = BaseColor.black
         calendarView.appearance.headerTitleFont = BaseFont.title2_num
         
@@ -179,9 +193,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UICo
     }
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        // 캘린더를 스와이프해서 이전/다음 달로 넘길 때,
-        // 타이틀뷰에 있는 레이블 값을 바꿔준다 (October)
-//        calendarView.reloadData()
+        titleLbl.text = calendar.currentPage.month
     }
     
     func presentRecordVC(mainCategory: MainCategory, subCategory: String, content: String, recordDate: Date, backEnable: Bool) {

@@ -44,6 +44,7 @@
 		E9A98FEF2AF7B68C0024F77B /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = E9A98FEE2AF7B68C0024F77B /* RxRelay */; };
 		E9A98FF12AF7B68C0024F77B /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E9A98FF02AF7B68C0024F77B /* RxSwift */; };
 		E9A98FF42AF7C3520024F77B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E9A98FF32AF7C3520024F77B /* SnapKit */; };
+		E9B4C9382B238B620090C152 /* StatsticsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B4C9372B238B620090C152 /* StatsticsDetailViewController.swift */; };
 		E9BAB81B2AFA577800B80410 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB81A2AFA577800B80410 /* MainViewController.swift */; };
 		E9BAB81D2AFA578300B80410 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB81C2AFA578300B80410 /* CalendarViewController.swift */; };
 		E9BAB8212AFA597100B80410 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB8202AFA597100B80410 /* DesignSystem.swift */; };
@@ -52,6 +53,8 @@
 		E9DC501A2AFCF03700E2083C /* MainTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC50192AFCF03700E2083C /* MainTableViewHeaderView.swift */; };
 		E9E120032B1329EF0067800A /* RealmDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E120022B1329EF0067800A /* RealmDataModel.swift */; };
 		E9F5ADE92B0F071E00BB164E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F5ADE82B0F071E00BB164E /* Coordinator.swift */; };
+		E9F671402B22188700ADC0C9 /* StatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F6713F2B22188700ADC0C9 /* StatisticsTableViewCell.swift */; };
+		E9F671422B2218C100ADC0C9 /* StatisticsCommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F671412B2218C100ADC0C9 /* StatisticsCommonTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +89,7 @@
 		E9A98FDB2AF7A6B40024F77B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9A98FDE2AF7A6B40024F77B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E9A98FE02AF7A6B40024F77B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9B4C9372B238B620090C152 /* StatsticsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsticsDetailViewController.swift; sourceTree = "<group>"; };
 		E9BAB81A2AFA577800B80410 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E9BAB81C2AFA578300B80410 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		E9BAB8202AFA597100B80410 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
@@ -94,6 +98,8 @@
 		E9DC50192AFCF03700E2083C /* MainTableViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewHeaderView.swift; sourceTree = "<group>"; };
 		E9E120022B1329EF0067800A /* RealmDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataModel.swift; sourceTree = "<group>"; };
 		E9F5ADE82B0F071E00BB164E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		E9F6713F2B22188700ADC0C9 /* StatisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewCell.swift; sourceTree = "<group>"; };
+		E9F671412B2218C100ADC0C9 /* StatisticsCommonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCommonTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,7 @@
 			children = (
 				E9A22A942B08CAC3000BC944 /* NaviView.swift */,
 				E9F5ADE82B0F071E00BB164E /* Coordinator.swift */,
+				E9F671412B2218C100ADC0C9 /* StatisticsCommonTableViewCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -245,7 +252,9 @@
 		E9902CC02B0F7634002BD2F7 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				E9B4C9362B238B110090C152 /* StatisticsDetailVC */,
 				E9902CC22B0F766E002BD2F7 /* StatisticsViewController.swift */,
+				E9F6713F2B22188700ADC0C9 /* StatisticsTableViewCell.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -304,6 +313,14 @@
 				E98143022AF92A14008C3285 /* Platform */,
 			);
 			path = LookIntoMind;
+			sourceTree = "<group>";
+		};
+		E9B4C9362B238B110090C152 /* StatisticsDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				E9B4C9372B238B620090C152 /* StatsticsDetailViewController.swift */,
+			);
+			path = StatisticsDetailVC;
 			sourceTree = "<group>";
 		};
 		E9BAB8152AFA558C00B80410 /* Tabbar */ = {
@@ -453,6 +470,7 @@
 				E9A98FD72AF7A6B20024F77B /* TabbarViewController.swift in Sources */,
 				E9DC501A2AFCF03700E2083C /* MainTableViewHeaderView.swift in Sources */,
 				E95363132B0CCD0D00675729 /* ThirdCreateViewController.swift in Sources */,
+				E9F671422B2218C100ADC0C9 /* StatisticsCommonTableViewCell.swift in Sources */,
 				E968D0382B15B311005E4F63 /* SaveDataModel.swift in Sources */,
 				E93767962AFF9BBB004DD5A6 /* EmptyTableViewCell.swift in Sources */,
 				E9E120032B1329EF0067800A /* RealmDataModel.swift in Sources */,
@@ -463,12 +481,14 @@
 				E9A98FD32AF7A6B20024F77B /* AppDelegate.swift in Sources */,
 				E9BAB8212AFA597100B80410 /* DesignSystem.swift in Sources */,
 				E91F94BC2B04E36A008B4D9A /* CalendarCollectionViewCell.swift in Sources */,
+				E9F671402B22188700ADC0C9 /* StatisticsTableViewCell.swift in Sources */,
 				E9BAB81B2AFA577800B80410 /* MainViewController.swift in Sources */,
 				E9A22A982B09EB85000BC944 /* FirstCreateCollectionViewCell.swift in Sources */,
 				E96C44392B20D9E70094742A /* MonthRecordData.swift in Sources */,
 				E9BAB81D2AFA578300B80410 /* CalendarViewController.swift in Sources */,
 				E9A98FD52AF7A6B20024F77B /* SceneDelegate.swift in Sources */,
 				E98143082AF92A6C008C3285 /* Extension.swift in Sources */,
+				E9B4C9382B238B620090C152 /* StatsticsDetailViewController.swift in Sources */,
 				E9A22A932B08CA4C000BC944 /* FirstCreateViewController.swift in Sources */,
 				E9A22A952B08CAC3000BC944 /* NaviView.swift in Sources */,
 				E9A22A902B076B7B000BC944 /* SplashViewController.swift in Sources */,

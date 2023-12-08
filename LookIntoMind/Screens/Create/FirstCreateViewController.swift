@@ -187,11 +187,11 @@ extension FirstCreateViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         })
-        let rightAlert = UIAlertAction(title: "이어서 쓰기", style: .default, handler: {[weak self] _ in
+        let rightAlert = UIAlertAction(title: "저장하기", style: .default, handler: {[weak self] _ in
             guard let self = self else { return }
             Task {
                 guard let date = SaveData.date, let mainCategory = SaveData.category else { return }
-                try RealmAPI.shared.tempSave(item: SaveDataModel(date: date, category: mainCategory, subCategory: SaveData.subCategory, content: SaveData.content))
+                _ = try RealmAPI.shared.tempSave(item: SaveDataModel(date: date, category: mainCategory, subCategory: SaveData.subCategory, content: SaveData.content))
                 self.navigationController?.popViewController(animated: true)
             }
         })

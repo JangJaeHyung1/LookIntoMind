@@ -10,7 +10,7 @@ import SnapKit
 
 class NaviView: UIView {
 
-    private let safeView: UIView = {
+    let safeView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = true

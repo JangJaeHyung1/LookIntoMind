@@ -158,7 +158,7 @@ extension RecordsViewController {
         
         dateLbl.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-8)
+            make.centerY.equalTo(naviView.backBtn)
         }
         
         categoryBGView.snp.makeConstraints { make in
