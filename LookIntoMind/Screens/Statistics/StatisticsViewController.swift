@@ -58,7 +58,9 @@ class StatisticsViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("1")
         if MonthRecords.dict.keys.count > 0 {
+            print("2")
             tableView.isHidden = false
             DispatchQueue.main.async {
                 self.monthKeys = []
@@ -98,6 +100,9 @@ extension StatisticsViewController {
     }
     private func configure() {
         view.backgroundColor = BaseColor.gray7
+        for month in MonthRecords.dict.keys.sorted().reversed() {
+            self.monthKeys.append(month)
+        }
     }
     
     private func fetch() {
