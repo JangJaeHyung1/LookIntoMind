@@ -186,9 +186,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UICo
     func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
         
         guard let cell = calendar.dequeueReusableCell(withIdentifier: CalendarCollectionViewCell.cellId, for: date, at: position) as? CalendarCollectionViewCell else { return FSCalendarCell() }
-        DispatchQueue.main.async {
-            cell.configure(with: self.records, date: date)
-        }
+        cell.configure(with: self.records, date: date)
         return cell
     }
     

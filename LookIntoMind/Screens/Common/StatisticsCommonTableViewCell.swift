@@ -145,6 +145,7 @@ class StatisticsCommonTableViewCell: UITableViewCell {
             make.top.bottom.leading.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(Double(percent)/Double(max))
         }
-        sliderBGView.backgroundColor = percent == 100 ? UIColor.black : BaseColor.gray6
+        sliderBGView.backgroundColor = percent == max ? UIColor.black : BaseColor.gray6
+        sliderView.isHidden = percent == max
     }
 }
