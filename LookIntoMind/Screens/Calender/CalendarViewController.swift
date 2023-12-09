@@ -122,7 +122,9 @@ extension CalendarViewController {
     
     private func setConstraints() {
         calendarView.snp.makeConstraints { make in
-            make.width.equalTo(350)
+//            make.width.equalTo(350)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(380)
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.centerX.equalToSuperview()
