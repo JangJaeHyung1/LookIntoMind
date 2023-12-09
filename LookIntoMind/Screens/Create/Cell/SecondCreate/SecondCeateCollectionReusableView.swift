@@ -20,8 +20,7 @@ class SecondCeateCollectionReusableView: UICollectionReusableView {
         lbl.lineBreakMode = .byWordWrapping
         lbl.text = "천천히 곱씹은 마음을\n골라주세요"
         lbl.isUserInteractionEnabled = true
-        //    lbl.adjustsFontSizeToFitWidth = true
-        //    lbl.minimumScaleFactor = 0.5
+        lbl.setLineSpacing(ratio: 1.4)
         return lbl
     }()
     
@@ -88,7 +87,8 @@ class SecondCeateCollectionReusableView: UICollectionReusableView {
     private func setConstraints() {
         title.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(48)
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().offset(4)
+            make.height.equalTo(72)
             make.trailing.equalToSuperview()
         }
         
@@ -96,7 +96,7 @@ class SecondCeateCollectionReusableView: UICollectionReusableView {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(90)
             make.top.equalTo(title.snp.bottom).offset(32)
-            make.bottom.equalToSuperview().offset(-28)
+//            make.bottom.equalToSuperview().offset(-28)
         }
         
         selectedMainCategoryGuideLbl.snp.makeConstraints { make in

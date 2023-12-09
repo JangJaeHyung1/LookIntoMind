@@ -85,7 +85,8 @@ class ThirdCreateViewController: UIViewController {
         let tv = UITextView()
         tv.text = "오늘 마음을 들여다보아요"
         tv.textColor = BaseColor.gray4
-        tv.font = .systemFont(ofSize: 14)
+        tv.font = BaseFont.body2_long
+        tv.setLineSpacing(lineSpacing: 9)
         tv.autocapitalizationType = .none
         tv.autocorrectionType = .no
         tv.smartDashesType = .no
@@ -164,7 +165,6 @@ extension ThirdCreateViewController {
         view.backgroundColor = .white
         dateLbl.text = Date().toString(Date().summary)
         setupKeyboardEvent()
-        
         if let content = loadData?.content {
             if content.count > 0 && content != "오늘 마음을 들여다보아요" {
                 textView.text = content

@@ -133,19 +133,6 @@ extension UITextField {
     }
 }
 
-extension NSAttributedString {
-    // 행간
-    func withLineSpacing(_ spacing: CGFloat) -> NSAttributedString {
-        let attributedString = NSMutableAttributedString(attributedString: self)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineBreakMode = .byTruncatingTail
-        paragraphStyle.lineSpacing = spacing
-        attributedString.addAttribute(.paragraphStyle,
-                                        value: paragraphStyle,
-                                        range: NSRange(location: 0, length: string.count))
-        return NSAttributedString(attributedString: attributedString)
-    }
-}
 extension UIViewController {
     func back(page: Int) {
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
@@ -210,6 +197,56 @@ extension UIColor {
         )
     }
 }
+
+
+// 행간
+extension UILabel {
+    func setLineSpacing(spacing: CGFloat) {
+        guard let text = text else { return }
+
+        let attributeString = NSMutableAttributedString(string: text)
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = spacing
+        attributeString.addAttribute(.paragraphStyle,
+                                     value: style,
+                                     range: NSRange(location: 0, length: attributeString.length))
+        attributedText = attributeString
+    }
+}
+
+// 행간
+extension UILabel {
+    func setLineSpacing(ratio: Double) {
+        let style = NSMutableParagraphStyle()
+        let lineheight = self.font.pointSize * ratio  //font size * multiple
+        style.minimumLineHeight = lineheight
+        style.maximumLineHeight = lineheight
+
+        self.attributedText = NSAttributedString(
+            string: self.text ?? "", attributes: [
+            .paragraphStyle: style
+          ])
+    }
+}
+
+extension UITextView {
+    func setLineSpacing(lineSpacing: CGFloat) {
+        // Get the existing attributed text from the UITextView
+        guard let existingAttributedString = self.attributedText else {
+            return
+        }
+        // Create a mutable copy of the existing attributed text
+        let mutableAttributedString = NSMutableAttributedString(attributedString: existingAttributedString)
+        // Create a paragraph style with the desired line spacing
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineSpacing
+        // Set the paragraph style for the entire text
+        mutableAttributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, mutableAttributedString.length))
+        // Set the updated attributed text to the UITextView
+        self.attributedText = mutableAttributedString
+    }
+}
+
 
 extension UIFont {
     static func customFont(ofSize fontSize: CGFloat, weight: UIFont.Weight, lineHeight: CGFloat) -> UIFont {

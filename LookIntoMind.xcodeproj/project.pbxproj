@@ -55,6 +55,8 @@
 		E9F5ADE92B0F071E00BB164E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F5ADE82B0F071E00BB164E /* Coordinator.swift */; };
 		E9F671402B22188700ADC0C9 /* StatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F6713F2B22188700ADC0C9 /* StatisticsTableViewCell.swift */; };
 		E9F671422B2218C100ADC0C9 /* StatisticsCommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F671412B2218C100ADC0C9 /* StatisticsCommonTableViewCell.swift */; };
+		E9FB88702B24D167000338DC /* SavePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB886F2B24D167000338DC /* SavePopUpView.swift */; };
+		E9FB88722B24F4F3000338DC /* LoadPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB88712B24F4F3000338DC /* LoadPopUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +102,8 @@
 		E9F5ADE82B0F071E00BB164E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E9F6713F2B22188700ADC0C9 /* StatisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewCell.swift; sourceTree = "<group>"; };
 		E9F671412B2218C100ADC0C9 /* StatisticsCommonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCommonTableViewCell.swift; sourceTree = "<group>"; };
+		E9FB886F2B24D167000338DC /* SavePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePopUpView.swift; sourceTree = "<group>"; };
+		E9FB88712B24F4F3000338DC /* LoadPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadPopUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,8 @@
 				E9A22A942B08CAC3000BC944 /* NaviView.swift */,
 				E9F5ADE82B0F071E00BB164E /* Coordinator.swift */,
 				E9F671412B2218C100ADC0C9 /* StatisticsCommonTableViewCell.swift */,
+				E9FB886F2B24D167000338DC /* SavePopUpView.swift */,
+				E9FB88712B24F4F3000338DC /* LoadPopUpView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -485,8 +491,10 @@
 				E9BAB81B2AFA577800B80410 /* MainViewController.swift in Sources */,
 				E9A22A982B09EB85000BC944 /* FirstCreateCollectionViewCell.swift in Sources */,
 				E96C44392B20D9E70094742A /* MonthRecordData.swift in Sources */,
+				E9FB88722B24F4F3000338DC /* LoadPopUpView.swift in Sources */,
 				E9BAB81D2AFA578300B80410 /* CalendarViewController.swift in Sources */,
 				E9A98FD52AF7A6B20024F77B /* SceneDelegate.swift in Sources */,
+				E9FB88702B24D167000338DC /* SavePopUpView.swift in Sources */,
 				E98143082AF92A6C008C3285 /* Extension.swift in Sources */,
 				E9B4C9382B238B620090C152 /* StatsticsDetailViewController.swift in Sources */,
 				E9A22A932B08CA4C000BC944 /* FirstCreateViewController.swift in Sources */,

@@ -58,8 +58,15 @@ class StatisticsViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+        if MonthRecords.dict.keys.count > 0 {
+            tableView.isHidden = false
+            DispatchQueue.main.async {
+                self.monthKeys = []
+                for month in MonthRecords.dict.keys.sorted().reversed() {
+                    self.monthKeys.append(month)
+                }
+                self.tableView.reloadData()
+            }
         }
     }
 }
@@ -81,6 +88,7 @@ extension StatisticsViewController {
         tableView.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 44, right: 0)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.isHidden = true
         tableView.separatorStyle = .none
         tableView.showsHorizontalScrollIndicator = false
         tableView.showsVerticalScrollIndicator = false
@@ -90,9 +98,6 @@ extension StatisticsViewController {
     }
     private func configure() {
         view.backgroundColor = BaseColor.gray7
-        for month in MonthRecords.dict.keys.sorted().reversed() {
-            monthKeys.append(month)
-        }
     }
     
     private func fetch() {

@@ -84,6 +84,7 @@ class MainViewModel {
             for data in dummyData {
                 _ = try RealmAPI.shared.save(item: data)
             }
+            RealmAPI.shared.saveMonthRecordData(items: dummyData)
             fetchData()
         }
     }

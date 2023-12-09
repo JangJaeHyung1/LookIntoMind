@@ -124,7 +124,7 @@ class RealmAPI {
         }
     }
     
-    private func saveMonthRecordData(items: [DataModel]){
+    func saveMonthRecordData(items: [DataModel]){
         MonthRecords.dict.removeAll()
         var categoryDict: [MainCategory: Int] = [:]
         var previousMonth = ""

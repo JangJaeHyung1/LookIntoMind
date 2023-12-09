@@ -20,8 +20,7 @@ class FirstCreateCVHeader: UICollectionReusableView {
         lbl.lineBreakMode = .byWordWrapping
         lbl.text = "가장 먼저 떠오르는\n커다란 마음을 골라주세요"
         lbl.isUserInteractionEnabled = true
-        //    lbl.adjustsFontSizeToFitWidth = true
-        //    lbl.minimumScaleFactor = 0.5
+        lbl.setLineSpacing(ratio: 1.4)
         return lbl
     }()
     override init(frame: CGRect) {
@@ -43,7 +42,8 @@ class FirstCreateCVHeader: UICollectionReusableView {
     private func setConstraints() {
         title.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(48)
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().offset(0)
+            make.height.equalTo(72)
             make.bottom.equalToSuperview().offset(-32)
             make.trailing.equalToSuperview()
         }

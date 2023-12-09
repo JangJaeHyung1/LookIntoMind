@@ -57,6 +57,8 @@ class FirstCreateViewController: UIViewController {
         btn.adjustsImageWhenHighlighted = false
         return btn
     }()
+    
+    // MARK: - var
     var todayDate: Date
     var loadData: DataModel?
     var selectedCategory: MainCategory? {

@@ -60,9 +60,9 @@ class RecordsViewController: UIViewController {
     
     private let textView: UITextView = {
         let tv = UITextView()
-        tv.textColor = BaseColor.black
+        tv.textColor = BaseColor.gray1
         tv.isEditable = false
-        tv.font = .systemFont(ofSize: 14)
+        tv.font = BaseFont.body2_long
         tv.autocapitalizationType = .none
         tv.autocorrectionType = .no
         tv.smartDashesType = .no
@@ -113,6 +113,7 @@ extension RecordsViewController {
     private func configure() {
         view.backgroundColor = .white
         dateLbl.text = recordDate.summary
+        textView.setLineSpacing(lineSpacing: 9)
     }
     
     private func fetch() {
