@@ -89,9 +89,9 @@ extension MainViewController {
     }
     
     private func bind() {
-        viewModel.output.loadDummyDataBtnIsHidden
-            .bind(to: loadDummyDataBtn.rx.isHidden)
-            .disposed(by: disposeBag)
+//        viewModel.output.loadDummyDataBtnIsHidden
+//            .bind(to: loadDummyDataBtn.rx.isHidden)
+//            .disposed(by: disposeBag)
         
         viewModel.output.spinnerStart
             .observe(on: MainScheduler.asyncInstance)
