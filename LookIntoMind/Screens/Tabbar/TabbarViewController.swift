@@ -74,8 +74,15 @@ extension TabbarViewController {
         self.setViewControllers([vc1,vc2,vc3], animated: false)
         
         guard let items = self.tabBar.items else { return }
-        for item in items {
-            item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+        for (idx, item) in items.enumerated() {
+            if idx == 0 {
+                item.imageInsets = UIEdgeInsets(top: 6, left: 24, bottom: -6, right: -30)
+            } else if idx == 1 {
+                item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            } else {
+                item.imageInsets = UIEdgeInsets(top: 6, left: -30, bottom: -6, right: 24)
+            }
+            
         }
         let itemsImage = ["calender_unselected", "main_unselected","records_unselected"]
         let selectedImages = ["calender_selected", "main_selected","records_selected"]
