@@ -122,9 +122,9 @@ extension CalendarViewController {
     
     private func setConstraints() {
         calendarView.snp.makeConstraints { make in
-//            make.width.equalTo(350)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.width.equalTo(350)
+//            make.leading.equalToSuperview().offset(20)
+//            make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(380)
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.centerX.equalToSuperview()
@@ -149,8 +149,6 @@ extension CalendarViewController {
 extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UICollectionViewDelegateFlowLayout {
     
     private func moveCurrentPage(moveUp: Bool) {
-        
-        
         dateComponents.month = moveUp ? 1 : -1
         currentPage = calendarCurrent.date(byAdding: dateComponents, to: currentPage ?? today)
         self.calendarView.setCurrentPage(currentPage!, animated: true)
@@ -160,8 +158,8 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UICo
     private func setCalendar() {
         calendarView.register(CalendarCollectionViewCell.self, forCellReuseIdentifier: CalendarCollectionViewCell.cellId)
         calendarView.locale = Locale(identifier: "ko_KR")
-        calendarView.headerHeight = 66
-        
+        calendarView.headerHeight = 44
+        calendarView.adjustsBoundingRectWhenChangingMonths = true
         calendarView.appearance.headerMinimumDissolvedAlpha = 0.0
 //        calendarView.appearance.headerDateFormat = "YYYY.MM"
         calendarView.appearance.headerDateFormat = ""
@@ -180,7 +178,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UICo
         calendarView.appearance.titleWeekendColor = UIColor.clear
         calendarView.appearance.titleTodayColor = UIColor.clear
         calendarView.appearance.titleFont = BaseFont.body2_num
-        
+        calendarView.weekdayHeight = 50
         calendarView.placeholderType = .none
         calendarView.reloadData()
     }
