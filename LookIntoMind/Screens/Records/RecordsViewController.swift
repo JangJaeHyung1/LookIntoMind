@@ -69,7 +69,7 @@ class RecordsViewController: UIViewController {
         tv.smartQuotesType = .no
         tv.smartInsertDeleteType = .no
         tv.spellCheckingType = .no
-        tv.contentInset = .init(top: 24, left: 24, bottom: 24, right: 24)
+        tv.contentInset = .init(top: 24, left: 0, bottom: 24, right: 0)
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
@@ -181,7 +181,8 @@ extension RecordsViewController {
         }
         
         textView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
             make.top.equalTo(categoryBGView.snp.bottom)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
