@@ -83,7 +83,6 @@ class ThirdCreateViewController: UIViewController {
     
     private let textView: UITextView = {
         let tv = UITextView()
-        tv.text = "오늘 마음을 들여다보아요"
         tv.textColor = BaseColor.gray4
         tv.font = BaseFont.body2_long
         tv.setLineSpacing(lineSpacing: 9)
@@ -93,7 +92,7 @@ class ThirdCreateViewController: UIViewController {
         tv.smartQuotesType = .no
         tv.smartInsertDeleteType = .no
         tv.spellCheckingType = .no
-        tv.contentInset = .init(top: 24, left: 24, bottom: 24, right: 24)
+        tv.contentInset = .init(top: 24, left: 0, bottom: 24, right: 0)
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
@@ -165,12 +164,26 @@ extension ThirdCreateViewController {
         view.backgroundColor = .white
         dateLbl.text = Date().toString(Date().summary)
         setupKeyboardEvent()
-        if let content = loadData?.content {
-            if content.count > 0 && content != "오늘 마음을 들여다보아요" {
-                textView.text = content
-                textView.textColor = BaseColor.black
-                completeBtn.isEnabled = true
+        var content = ""
+        
+        if let temp = SaveData.content {
+            if temp.count > 0 {
+                content = temp
             }
+        } else {
+            if let temp = loadData?.content {
+                if temp.count > 0 {
+                    content = temp
+                }
+            }
+        }
+        
+        if content.count > 0 && content != "오늘 마음을 들여다보아요" {
+            textView.text = content
+            textView.textColor = BaseColor.black
+            completeBtn.isEnabled = true
+        } else {
+            textView.text = "오늘 마음을 들여다보아요"
         }
     }
     
@@ -211,7 +224,9 @@ extension ThirdCreateViewController {
         naviView.backBtn.rx.tap
             .subscribe(onNext:{ [weak self] res in
                 guard let self else { return }
-                SaveData.content = self.textView.text
+                if let content = textView.text {
+                    SaveData.content = self.textView.text
+                }
                 self.navigationController?.popViewController(animated: false)
             })
             .disposed(by: disposeBag)
@@ -281,7 +296,8 @@ extension ThirdCreateViewController {
         }
         
         textView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
             make.top.equalTo(categoryBGView.snp.bottom)
             make.bottom.equalTo(keyboradDownView.snp.top).offset(44)
         }
@@ -299,9 +315,9 @@ extension ThirdCreateViewController {
         }
         
         keyboardDownBtn.snp.makeConstraints { make in
-            make.width.height.equalTo(29)
+            make.width.height.equalTo(34)
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().offset(-20)
+            make.trailing.equalToSuperview().offset(-15)
         }
         
         
@@ -341,9 +357,13 @@ extension ThirdCreateViewController {
         }
         view.layoutIfNeeded()
         keyboradDownView.isHidden = false
-        textView.snp.updateConstraints { make in
+        textView.snp.remakeConstraints { make in
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
+            make.top.equalTo(categoryBGView.snp.bottom)
             make.bottom.equalTo(keyboradDownView.snp.top).offset(0)
         }
+        textView.layoutIfNeeded()
     }
 
     @objc func keyboardWillHide(_ sender: Notification) {
@@ -354,8 +374,12 @@ extension ThirdCreateViewController {
         }
         view.layoutIfNeeded()
         keyboradDownView.isHidden = true
-        textView.snp.updateConstraints { make in
+        textView.snp.remakeConstraints { make in
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
+            make.top.equalTo(categoryBGView.snp.bottom)
             make.bottom.equalTo(keyboradDownView.snp.top).offset(44)
         }
+        textView.layoutIfNeeded()
     }
 }

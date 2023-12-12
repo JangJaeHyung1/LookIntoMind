@@ -59,8 +59,8 @@ class RealmAPI {
             guard let category = MainCategory(rawValue: item.category) else {
                 return nil }
             let data = SaveDataModel(date: item.date, category: category, subCategory: item.subCategory, content: item.content)
-//            debugPrint("🔵 Realm API tempLoad success")
-            debugPrint("🔵 Realm API tempLoad success : \(data)")
+            debugPrint("🔵 Realm API tempLoad success")
+//            debugPrint("🔵 Realm API tempLoad success : \(data)")
             return data
         } catch {
             debugPrint("❌ Realm API tempLoad error: \(error.localizedDescription)")

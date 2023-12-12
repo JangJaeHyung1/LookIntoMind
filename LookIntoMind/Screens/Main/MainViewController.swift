@@ -282,8 +282,8 @@ extension MainViewController {
         }
     }
     func presentCreateVC(loadData: DataModel?, todayDate: Date) {
-        let nextVC = FirstCreateViewController(loadData: loadData, todayDate: self.viewModel.output.todayDate)
         removeTempSaveData()
+        let nextVC = FirstCreateViewController(loadData: loadData, todayDate: self.viewModel.output.todayDate)
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     

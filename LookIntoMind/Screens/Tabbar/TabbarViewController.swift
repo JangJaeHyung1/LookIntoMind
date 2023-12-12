@@ -76,11 +76,11 @@ extension TabbarViewController {
         guard let items = self.tabBar.items else { return }
         for (idx, item) in items.enumerated() {
             if idx == 0 {
-                item.imageInsets = UIEdgeInsets(top: 6, left: 24, bottom: -6, right: -30)
+                item.imageInsets = UIEdgeInsets(top: 6, left: 24, bottom: -6, right: -28)
             } else if idx == 1 {
                 item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
             } else {
-                item.imageInsets = UIEdgeInsets(top: 6, left: -30, bottom: -6, right: 24)
+                item.imageInsets = UIEdgeInsets(top: 6, left: -28, bottom: -6, right: 24)
             }
             
         }

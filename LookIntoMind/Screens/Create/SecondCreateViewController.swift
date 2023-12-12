@@ -118,7 +118,11 @@ extension SecondCreateViewController {
     }
     private func configure() {
         view.backgroundColor = BaseColor.gray7
-        self.selectedCategory = loadData?.subCategory
+        if let sub = SaveData.subCategory {
+            self.selectedCategory = sub
+        } else {
+            self.selectedCategory = loadData?.subCategory
+        }
     }
     
     private func fetch() {
@@ -210,11 +214,20 @@ extension SecondCreateViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SecondCreateCollectionViewCell.cellId, for: indexPath) as! SecondCreateCollectionViewCell
         cell.configure(with: subCategory[indexPath.row])
-        if subCategory[indexPath.row] == loadData?.subCategory {
-            cell.isSelected = true
-            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
-            cell.layoutIfNeeded()
+        if let sub = SaveData.subCategory {
+            if subCategory[indexPath.row] == sub {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+                cell.layoutIfNeeded()
+            }
+        } else {
+            if subCategory[indexPath.row] == loadData?.subCategory {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+                cell.layoutIfNeeded()
+            }
         }
+        
         return cell
     }
     

@@ -109,6 +109,12 @@ class FirstCreateViewController: UIViewController {
     
     init(loadData: DataModel?, todayDate: Date) {
         self.loadData = loadData
+        if let tempContent = loadData?.content {
+            SaveData.content = tempContent
+        }
+        if let sub = loadData?.subCategory {
+            SaveData.subCategory = sub
+        }
         self.todayDate = todayDate
         super.init(nibName: nil, bundle: nil)
     }
@@ -181,7 +187,6 @@ extension FirstCreateViewController {
     
     private func presentModal() {
         let sheet = UIAlertController(title: "일기를 임시저장하시겠어요?", message: nil, preferredStyle: .alert)
-
         let leftAlert = UIAlertAction(title: "저장안함", style: .destructive, handler: {[weak self] _ in
             guard let self = self else { return }
             Task {
