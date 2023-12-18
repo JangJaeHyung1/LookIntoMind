@@ -80,7 +80,7 @@ class SecondCreateViewController: UIViewController {
         self.loadData = loadData
 
         self.mainCategory = mainCategory
-        self.subCategory = SubCategory.array[mainCategory]!
+        self.subCategory = SubCategory.array[mainCategory] ?? []
         self.todayDate = todayDate
         super.init(nibName: nil, bundle: nil)
     }
