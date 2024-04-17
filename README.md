@@ -1,4 +1,4 @@
-![image](https://github.com/JangJaeHyung1/LookIntoMind/assets/37135479/ecb48b36-215a-449d-800c-f968d26f7989)# 마음보기
+# 마음보기
 ## 대분류를 통해 쉽게 본인의 감정을 선택하고, <br>116개의 감정어로 하루를 표현하는 '감정 다이어리 어플'입니다.
 
 앱스토어 링크 - https://apps.apple.com/kr/app/id6473691443
