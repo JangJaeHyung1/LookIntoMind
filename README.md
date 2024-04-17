@@ -22,7 +22,7 @@
 
 |기록 리스트|감정 선택|-|
 |---|---|---|
-|![400x800bb](https://github.com/JangJaeHyung1/LookIntoMind/assets/37135479/05bd81c8-7c0a-4cd7-8f0e-ec969000c0b2)|![400x800bb (1)](https://github.com/JangJaeHyung1/LookIntoMind/assets/37135479/84ad1433-2629-4a63-9ea5-e2cfce38c9b0)|
+|![400x800bb](https://github.com/JangJaeHyung1/LookIntoMind/assets/37135479/05bd81c8-7c0a-4cd7-8f0e-ec969000c0b2)|![400x800bb (1)](https://github.com/JangJaeHyung1/LookIntoMind/assets/37135479/84ad1433-2629-4a63-9ea5-e2cfce38c9b0)|![400x800bb]()|
 
 |일기 작성|달력|통계|
 |---|---|---|
