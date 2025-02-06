@@ -34,3 +34,5 @@
 - input output struct를 활용하여 가독성 향상
   
 ![image](https://github.com/JangJaeHyung1/LookIntoMind/assets/37135479/067b9793-97d3-4751-ba9f-1cc8614649e3)
+
+https://github.com/JangJaeHyung1/LookIntoMind/blob/main/LookIntoMind/Screens/Main/MainViewModel.swift
