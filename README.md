@@ -30,9 +30,9 @@
 
 ### 3. Clean Architecture
 - Rxswift로 데이터 스트림 제어
-- ViewModel에서 api로 부터 받은 데이터를 View영역에 binding할 수 있게 정제
+- ViewModel에서 api로 부터 받은 데이터를 View영역에 binding
 - input output struct를 활용하여 가독성 향상
+- https://github.com/JangJaeHyung1/LookIntoMind/blob/main/LookIntoMind/Screens/Main/MainViewModel.swift
   
 ![image](https://github.com/JangJaeHyung1/LookIntoMind/assets/37135479/067b9793-97d3-4751-ba9f-1cc8614649e3)
 
-https://github.com/JangJaeHyung1/LookIntoMind/blob/main/LookIntoMind/Screens/Main/MainViewModel.swift
