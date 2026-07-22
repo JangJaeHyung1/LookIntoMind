@@ -42,7 +42,8 @@ class CalendarViewController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textColor = BaseColor.black
         lbl.font = BaseFont.title2_num
-        lbl.text = "2023.11"
+        lbl.text = Date().toString(Date().month)
+
         lbl.lineBreakMode = .byWordWrapping
         lbl.isUserInteractionEnabled = true
         return lbl
@@ -65,10 +66,8 @@ class CalendarViewController: UIViewController {
         setUp()
     }
     override func viewWillAppear(_ animated: Bool) {
-        if self.records.count != LoadData.items.count {
-            self.records = LoadData.items
-            calendarView.reloadData()
-        }
+        self.records = LoadData.items
+        calendarView.reloadData()
     }
     
     init() {
@@ -95,6 +94,7 @@ extension CalendarViewController {
         
         calendarView.delegate = self
         calendarView.dataSource = self
+
     }
     
     private func bind() {
@@ -121,11 +121,11 @@ extension CalendarViewController {
     }
     
     private func setConstraints() {
+        let multiply: CGFloat = CGFloat(380) / CGFloat(350)
         calendarView.snp.makeConstraints { make in
-            make.width.equalTo(350)
-//            make.leading.equalToSuperview().offset(20)
-//            make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(380)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(calendarView.snp.width).multipliedBy(multiply)
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.centerX.equalToSuperview()
         }

@@ -57,19 +57,15 @@ class StatisticsViewController: UIViewController {
         setUp()
     }
     override func viewWillAppear(_ animated: Bool) {
-        if MonthRecords.dict.keys.count > 0 {
-            tableView.isHidden = false
-        }
+        tableView.isHidden = MonthRecords.dict.isEmpty
         if dict != MonthRecords.dict {
             dict = MonthRecords.dict
-            if MonthRecords.dict.keys.count > 0 {
-                DispatchQueue.main.async {
-                    self.monthKeys = []
-                    for month in MonthRecords.dict.keys.sorted().reversed() {
-                        self.monthKeys.append(month)
-                    }
-                    self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.monthKeys = []
+                for month in MonthRecords.dict.keys.sorted().reversed() {
+                    self.monthKeys.append(month)
                 }
+                self.tableView.reloadData()
             }
         }
     }

@@ -61,6 +61,8 @@ class FirstCreateViewController: UIViewController {
     // MARK: - var
     var todayDate: Date
     var loadData: DataModel?
+    private let editingDate: Date?
+    private let onEditCompleted: ((DataModel) -> Void)?
     var selectedCategory: MainCategory? {
         didSet {
             if selectedCategory != nil {
@@ -107,8 +109,15 @@ class FirstCreateViewController: UIViewController {
         setUp()
     }
     
-    init(loadData: DataModel?, todayDate: Date) {
+    init(
+        loadData: DataModel?,
+        todayDate: Date,
+        editingDate: Date? = nil,
+        onEditCompleted: ((DataModel) -> Void)? = nil
+    ) {
         self.loadData = loadData
+        self.editingDate = editingDate
+        self.onEditCompleted = onEditCompleted
         if let tempContent = loadData?.content {
             SaveData.content = tempContent
         }
@@ -152,7 +161,7 @@ extension FirstCreateViewController {
     }
     private func configure() {
         view.backgroundColor = BaseColor.gray7
-        SaveData.date = Date()
+        SaveData.date = todayDate
         self.selectedCategory = loadData?.category
     }
     
@@ -173,6 +182,16 @@ extension FirstCreateViewController {
         naviView.backBtn.rx.tap
             .subscribe(onNext:{ [weak self] res in
                 guard let self else { return }
+                if editingDate != nil {
+                    SaveData.reset()
+                    if navigationController?.viewControllers.first === self,
+                       navigationController?.presentingViewController != nil {
+                        navigationController?.dismiss(animated: true)
+                    } else {
+                        navigationController?.popViewController(animated: true)
+                    }
+                    return
+                }
                 // 모달 띄우기
                 
                 if selectedCategory != nil {
@@ -216,7 +235,13 @@ extension FirstCreateViewController {
     }
     
     func presentNextVC(loadData: DataModel?, mainCategory: MainCategory, todayDate: Date) {
-        let nextVC = SecondCreateViewController(loadData: loadData, mainCategory: mainCategory, todayDate: todayDate)
+        let nextVC = SecondCreateViewController(
+            loadData: loadData,
+            mainCategory: mainCategory,
+            todayDate: todayDate,
+            editingDate: editingDate,
+            onEditCompleted: onEditCompleted
+        )
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
@@ -237,8 +262,8 @@ extension FirstCreateViewController {
 
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(naviView.snp.bottom)
-            make.width.equalTo(104 * 3 + 30)
-            make.centerX.equalToSuperview()
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-20)
             make.bottom.equalTo(nextBGView.snp.top)
         }
         
@@ -306,7 +331,10 @@ extension FirstCreateViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 104, height: 120)
+        let spacing: CGFloat = 15
+        let availableWidth = collectionView.bounds.width - (spacing * 2)
+        let itemWidth = floor(availableWidth / 3)
+        return CGSize(width: max(itemWidth, 0), height: 120)
     }
 
     //2

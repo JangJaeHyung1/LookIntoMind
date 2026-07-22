@@ -288,10 +288,7 @@ extension MainViewController {
     }
     
     func removeTempSaveData() {
-        SaveData.date = nil
-        SaveData.category = nil
-        SaveData.subCategory = nil
-        SaveData.content = nil
+        SaveData.reset()
     }
     
 }

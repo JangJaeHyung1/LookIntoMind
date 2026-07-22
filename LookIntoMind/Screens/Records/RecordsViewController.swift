@@ -18,6 +18,17 @@ class RecordsViewController: UIViewController {
         view.isUserInteractionEnabled = true
         return view
     }()
+
+    private let moreBtn: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        btn.tintColor = BaseColor.black
+        btn.accessibilityLabel = "일기 메뉴"
+        btn.contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.adjustsImageWhenHighlighted = false
+        return btn
+    }()
     
     private let dateLbl: UILabel = {
         let lbl = UILabel()
@@ -134,6 +145,12 @@ extension RecordsViewController {
                 self.dismiss(animated: true)
             })
             .disposed(by: disposeBag)
+
+        moreBtn.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.presentRecordMenu()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func setNavi() {
@@ -144,6 +161,7 @@ extension RecordsViewController {
     private func addViews() {
         view.addSubview(naviView)
         naviView.addSubview(dateLbl)
+        naviView.addSubview(moreBtn)
         
         view.addSubview(categoryBGView)
         categoryBGView.addSubview(categoryImageView)
@@ -160,6 +178,12 @@ extension RecordsViewController {
         dateLbl.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalTo(naviView.backBtn)
+        }
+
+        moreBtn.snp.makeConstraints { make in
+            make.width.height.equalTo(40)
+            make.centerY.equalTo(naviView.backBtn)
+            make.trailing.equalToSuperview().offset(backEnable ? -15 : -55)
         }
         
         categoryBGView.snp.makeConstraints { make in
@@ -187,6 +211,98 @@ extension RecordsViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
+    }
+
+    private func presentRecordMenu() {
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        sheet.addAction(UIAlertAction(title: "편집하기", style: .default) { [weak self] _ in
+            self?.presentEditViewController()
+        })
+        sheet.addAction(UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] _ in
+            self?.presentDeleteConfirmation()
+        })
+        sheet.addAction(UIAlertAction(title: "취소", style: .cancel))
+        sheet.popoverPresentationController?.sourceView = moreBtn
+        sheet.popoverPresentationController?.sourceRect = moreBtn.bounds
+        present(sheet, animated: true)
+    }
+
+    private func presentEditViewController() {
+        SaveData.reset()
+        let record = DataModel(
+            date: recordDate,
+            category: mainCategory,
+            subCategory: subCategory,
+            content: textView.text ?? ""
+        )
+        let editViewController = FirstCreateViewController(
+            loadData: record,
+            todayDate: recordDate,
+            editingDate: recordDate,
+            onEditCompleted: { [weak self] updatedRecord in
+                self?.apply(updatedRecord)
+            }
+        )
+
+        if backEnable, let navigationController {
+            navigationController.pushViewController(editViewController, animated: true)
+        } else {
+            let navigationController = UINavigationController(rootViewController: editViewController)
+            navigationController.navigationBar.isHidden = true
+            navigationController.modalPresentationStyle = .fullScreen
+            present(navigationController, animated: true)
+        }
+    }
+
+    private func apply(_ record: DataModel) {
+        mainCategory = record.category
+        subCategory = record.subCategory
+        subCategoryLbl.text = record.subCategory
+        categoryImageView.image = UIImage(named: record.category.rawValue)
+        textView.text = record.content
+        textView.setLineSpacing(lineSpacing: 9)
+    }
+
+    private func presentDeleteConfirmation() {
+        let alert = UIAlertController(
+            title: "일기를 삭제할까요?",
+            message: "삭제한 일기는 복구할 수 없어요.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        alert.addAction(UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] _ in
+            self?.deleteRecord()
+        })
+        present(alert, animated: true)
+    }
+
+    private func deleteRecord() {
+        do {
+            let didDelete = try RealmAPI.shared.delete(matching: recordDate)
+            guard didDelete else {
+                presentDeleteFailureAlert()
+                return
+            }
+            RealmAPI.shared.refreshCachedData()
+
+            if backEnable {
+                navigationController?.popViewController(animated: true)
+            } else {
+                dismiss(animated: true)
+            }
+        } catch {
+            presentDeleteFailureAlert()
+        }
+    }
+
+    private func presentDeleteFailureAlert() {
+        let alert = UIAlertController(
+            title: "삭제하지 못했어요",
+            message: "잠시 후 다시 시도해 주세요.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
     }
     
 }

@@ -128,17 +128,28 @@ class ThirdCreateViewController: UIViewController {
     var subCategory: String
     var todayDate: Date
     var loadData: DataModel?
+    private let editingDate: Date?
+    private let onEditCompleted: ((DataModel) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
     }
     
-    init(loadData: DataModel?, mainCategory: MainCategory, subCategory: String, todayDate: Date) {
+    init(
+        loadData: DataModel?,
+        mainCategory: MainCategory,
+        subCategory: String,
+        todayDate: Date,
+        editingDate: Date? = nil,
+        onEditCompleted: ((DataModel) -> Void)? = nil
+    ) {
         self.loadData = loadData
         self.mainCategory = mainCategory
         self.subCategory = subCategory
         self.todayDate = todayDate
+        self.editingDate = editingDate
+        self.onEditCompleted = onEditCompleted
         
         self.subCategoryLbl.text = subCategory
         self.categoryImageView.image = UIImage(named: mainCategory.rawValue)
@@ -162,7 +173,7 @@ extension ThirdCreateViewController {
     }
     private func configure() {
         view.backgroundColor = .white
-        dateLbl.text = Date().toString(Date().summary)
+        dateLbl.text = todayDate.summary
         setupKeyboardEvent()
         var content = ""
         
@@ -214,9 +225,30 @@ extension ThirdCreateViewController {
                 guard let self else { return }
                 Task {
                     let toRecordData = DataModel(date: self.todayDate, category: self.mainCategory, subCategory: self.subCategory, content: self.textView.text)
-                    _ = try RealmAPI.shared.save(item: toRecordData)
-                    _ = try RealmAPI.shared.deleteTemp()
-                    self.back(page: 4)
+                    let didSave: Bool
+                    if let editingDate = self.editingDate {
+                        didSave = try RealmAPI.shared.update(item: toRecordData, matching: editingDate)
+                    } else {
+                        didSave = try RealmAPI.shared.save(item: toRecordData)
+                    }
+
+                    guard didSave else {
+                        self.presentSaveFailureAlert()
+                        return
+                    }
+
+                    RealmAPI.shared.refreshCachedData()
+                    if self.editingDate == nil {
+                        _ = try RealmAPI.shared.deleteTemp()
+                    }
+                    SaveData.reset()
+
+                    if self.editingDate != nil {
+                        self.onEditCompleted?(toRecordData)
+                        self.finishEditing()
+                    } else {
+                        self.back(page: 4)
+                    }
                 }
             })
             .disposed(by: disposeBag)
@@ -233,6 +265,28 @@ extension ThirdCreateViewController {
     }
     
     private func setNavi() {
+    }
+
+    private func finishEditing() {
+        guard let navigationController else { return }
+        if navigationController.viewControllers.first is FirstCreateViewController {
+            navigationController.dismiss(animated: true)
+        } else if let recordsViewController = navigationController.viewControllers
+            .first(where: { $0 is RecordsViewController }) {
+            navigationController.popToViewController(recordsViewController, animated: true)
+        } else {
+            navigationController.popViewController(animated: true)
+        }
+    }
+
+    private func presentSaveFailureAlert() {
+        let alert = UIAlertController(
+            title: "저장하지 못했어요",
+            message: "잠시 후 다시 시도해 주세요.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
     }
     
     private func addViews() {

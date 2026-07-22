@@ -83,6 +83,58 @@ class RealmAPI {
         }
         return true
     }
+
+    func update(item: DataModel, matching originalDate: Date) throws -> Bool {
+        do {
+            let realm = try Realm()
+            guard let savedData = realm.objects(RealmDataModel.self)
+                .filter("date == %@", originalDate)
+                .first else {
+                return false
+            }
+
+            try realm.write {
+                savedData.category = item.category.rawValue
+                savedData.subCategory = item.subCategory
+                savedData.content = item.content
+                debugPrint("🔵 Realm API update success")
+            }
+        } catch {
+            debugPrint("❌ Realm API update error: \(error.localizedDescription)")
+            return false
+        }
+        return true
+    }
+
+    func delete(matching date: Date) throws -> Bool {
+        do {
+            let realm = try Realm()
+            guard let savedData = realm.objects(RealmDataModel.self)
+                .filter("date == %@", date)
+                .first else {
+                return false
+            }
+
+            try realm.write {
+                realm.delete(savedData)
+                debugPrint("🔵 Realm API delete success")
+            }
+        } catch {
+            debugPrint("❌ Realm API delete error: \(error.localizedDescription)")
+            return false
+        }
+        return true
+    }
+
+    func refreshCachedData() {
+        do {
+            let items = try load()
+            LoadData.items = items
+            saveMonthRecordData(items: items)
+        } catch {
+            debugPrint("❌ Realm API refreshCachedData error: \(error.localizedDescription)")
+        }
+    }
     
     func load() throws -> [DataModel] {
         do {

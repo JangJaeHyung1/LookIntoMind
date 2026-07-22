@@ -70,18 +70,28 @@ class SecondCreateViewController: UIViewController {
     }
     var subCategory: [String]
     var todayDate: Date
+    private let editingDate: Date?
+    private let onEditCompleted: ((DataModel) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
     }
     
-    init(loadData: DataModel?, mainCategory: MainCategory, todayDate: Date) {
+    init(
+        loadData: DataModel?,
+        mainCategory: MainCategory,
+        todayDate: Date,
+        editingDate: Date? = nil,
+        onEditCompleted: ((DataModel) -> Void)? = nil
+    ) {
         self.loadData = loadData
 
         self.mainCategory = mainCategory
         self.subCategory = SubCategory.array[mainCategory] ?? []
         self.todayDate = todayDate
+        self.editingDate = editingDate
+        self.onEditCompleted = onEditCompleted
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -148,7 +158,14 @@ extension SecondCreateViewController {
     }
     
     func presentNextVC(loadData: DataModel?, mainCategory: MainCategory, subCategory: String, todayDate: Date) {
-        let nextVC = ThirdCreateViewController(loadData: loadData, mainCategory: mainCategory, subCategory: subCategory, todayDate: todayDate)
+        let nextVC = ThirdCreateViewController(
+            loadData: loadData,
+            mainCategory: mainCategory,
+            subCategory: subCategory,
+            todayDate: todayDate,
+            editingDate: editingDate,
+            onEditCompleted: onEditCompleted
+        )
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
@@ -177,8 +194,8 @@ extension SecondCreateViewController {
 
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(naviView.snp.bottom)
-            make.width.equalTo(110 * 3 + 20)
-            make.centerX.equalToSuperview()
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-20)
             make.bottom.equalTo(nextBGView.snp.top)
         }
         
@@ -256,7 +273,10 @@ extension SecondCreateViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 110, height: 44)
+        let spacing: CGFloat = 10
+        let availableWidth = collectionView.bounds.width - (spacing * 2)
+        let itemWidth = floor(availableWidth / 3)
+        return CGSize(width: max(itemWidth, 0), height: 44)
     }
 
     //2

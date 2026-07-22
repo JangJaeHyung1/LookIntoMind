@@ -38,12 +38,12 @@
 		E9A98FDA2AF7A6B20024F77B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A98FD82AF7A6B20024F77B /* Main.storyboard */; };
 		E9A98FDC2AF7A6B40024F77B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9A98FDB2AF7A6B40024F77B /* Assets.xcassets */; };
 		E9A98FDF2AF7A6B40024F77B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A98FDD2AF7A6B40024F77B /* LaunchScreen.storyboard */; };
-		E9A98FE82AF7B43C0024F77B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E9A98FE72AF7B43C0024F77B /* Realm */; };
 		E9A98FEA2AF7B43C0024F77B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E9A98FE92AF7B43C0024F77B /* RealmSwift */; };
 		E9A98FED2AF7B68C0024F77B /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E9A98FEC2AF7B68C0024F77B /* RxCocoa */; };
 		E9A98FEF2AF7B68C0024F77B /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = E9A98FEE2AF7B68C0024F77B /* RxRelay */; };
 		E9A98FF12AF7B68C0024F77B /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E9A98FF02AF7B68C0024F77B /* RxSwift */; };
 		E9A98FF42AF7C3520024F77B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E9A98FF32AF7C3520024F77B /* SnapKit */; };
+		E9AC0C963010E5A300116935 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = E9A98FE92AF7B43C0024F77B /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E9B4C9382B238B620090C152 /* StatsticsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B4C9372B238B620090C152 /* StatsticsDetailViewController.swift */; };
 		E9BAB81B2AFA577800B80410 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB81A2AFA577800B80410 /* MainViewController.swift */; };
 		E9BAB81D2AFA578300B80410 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BAB81C2AFA578300B80410 /* CalendarViewController.swift */; };
@@ -58,6 +58,20 @@
 		E9FB88702B24D167000338DC /* SavePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB886F2B24D167000338DC /* SavePopUpView.swift */; };
 		E9FB88722B24F4F3000338DC /* LoadPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB88712B24F4F3000338DC /* LoadPopUpView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E9AC0C973010E5A300116935 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E9AC0C963010E5A300116935 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E91F94BB2B04E36A008B4D9A /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -117,7 +131,6 @@
 				E9A98FF42AF7C3520024F77B /* SnapKit in Frameworks */,
 				E9A98FEF2AF7B68C0024F77B /* RxRelay in Frameworks */,
 				E97AAE8A2B02521900EC60B0 /* FSCalendar in Frameworks */,
-				E9A98FE82AF7B43C0024F77B /* Realm in Frameworks */,
 				E9A22A8B2B076560000BC944 /* Gifu in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,6 +398,7 @@
 				E9A98FCB2AF7A6B20024F77B /* Sources */,
 				E9A98FCC2AF7A6B20024F77B /* Frameworks */,
 				E9A98FCD2AF7A6B20024F77B /* Resources */,
+				E9AC0C973010E5A300116935 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -392,7 +406,6 @@
 			);
 			name = LookIntoMind;
 			packageProductDependencies = (
-				E9A98FE72AF7B43C0024F77B /* Realm */,
 				E9A98FE92AF7B43C0024F77B /* RealmSwift */,
 				E9A98FEC2AF7B68C0024F77B /* RxCocoa */,
 				E9A98FEE2AF7B68C0024F77B /* RxRelay */,
@@ -649,7 +662,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2023121801;
+				CURRENT_PROJECT_VERSION = 2024080101;
 				DEVELOPMENT_TEAM = 8Y6GZNH939;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LookIntoMind/Supporting/Info.plist;
@@ -659,18 +672,19 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ggasoon2.LookIntoMind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -683,7 +697,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2023121801;
+				CURRENT_PROJECT_VERSION = 2024080101;
 				DEVELOPMENT_TEAM = 8Y6GZNH939;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LookIntoMind/Supporting/Info.plist;
@@ -693,18 +707,19 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ggasoon2.LookIntoMind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -755,8 +770,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = 20.0.5;
 			};
 		};
 		E9A98FEB2AF7B68C0024F77B /* XCRemoteSwiftPackageReference "RxSwift" */ = {
@@ -787,11 +802,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E9A22A892B076560000BC944 /* XCRemoteSwiftPackageReference "Gifu" */;
 			productName = Gifu;
-		};
-		E9A98FE72AF7B43C0024F77B /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E9A98FE62AF7B43C0024F77B /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
 		};
 		E9A98FE92AF7B43C0024F77B /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;

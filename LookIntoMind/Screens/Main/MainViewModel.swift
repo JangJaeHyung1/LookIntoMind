@@ -70,6 +70,7 @@ class MainViewModel {
         input.fetchTempLoadAndTodayData.asObserver()
             .subscribe(onNext:{ [weak self] res in
                 guard let self else { return }
+                self.fetchData()
                 self.fetchTemp()
                 self.fetchToday()
             })
@@ -99,14 +100,11 @@ class MainViewModel {
             var data = try RealmAPI.shared.load()
             output.loadDummyDataBtnIsHidden.accept(data.count > 3)
             LoadData.items = data
-            for (index, datum) in data.enumerated() {
-                if datum.date.summary == output.todayDate.summary {
-                    data.remove(at: index)
-                }
-            }
+            data.removeAll { $0.date.summary == output.todayDate.summary }
             output.fetchData.accept(data)
             output.moreBtnIsHidden.accept(data.count < 12)
             output.pageNum.accept(1)
+            output.recordData.accept([])
             fetchPage()
         } catch {
             print("❌ mainVM fetchData() load error: \(error.localizedDescription)")
@@ -137,6 +135,8 @@ class MainViewModel {
             output.todayData.accept(todayData)
             output.tableViewReloadData.onNext(())
         } catch {
+            output.todayData.accept(nil)
+            output.tableViewReloadData.onNext(())
             print("❌ fetch loadToday error: \(error.localizedDescription)")
         }
     }
@@ -151,5 +151,4 @@ class MainViewModel {
         }
     }
 }
-
 

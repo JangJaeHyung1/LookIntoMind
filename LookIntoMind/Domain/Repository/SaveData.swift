@@ -13,4 +13,11 @@ struct SaveData {
     static var category: MainCategory?
     static var subCategory: String?
     static var content: String?
+
+    static func reset() {
+        date = nil
+        category = nil
+        subCategory = nil
+        content = nil
+    }
 }
