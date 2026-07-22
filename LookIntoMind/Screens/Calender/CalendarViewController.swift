@@ -208,6 +208,6 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UICo
         guard let selectedData = records.filter({$0.date.summary == date.summary}).first else {
             return
         }
-        presentRecordVC(mainCategory: selectedData.category, subCategory: selectedData.subCategory, content: selectedData.content, recordDate: date, backEnable: false)
+        presentRecordVC(mainCategory: selectedData.category, subCategory: selectedData.subCategory, content: selectedData.content, recordDate: selectedData.date, backEnable: false)
     }
 }

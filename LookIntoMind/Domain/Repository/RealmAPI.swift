@@ -87,9 +87,14 @@ class RealmAPI {
     func update(item: DataModel, matching originalDate: Date) throws -> Bool {
         do {
             let realm = try Realm()
+            let startOfDay = Calendar.current.startOfDay(for: originalDate)
+            guard let startOfNextDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay) else {
+                return false
+            }
             guard let savedData = realm.objects(RealmDataModel.self)
-                .filter("date == %@", originalDate)
+                .filter("date >= %@ AND date < %@", startOfDay, startOfNextDay)
                 .first else {
+                debugPrint("❌ Realm API update error: record not found for \(originalDate.summary)")
                 return false
             }
 
@@ -109,9 +114,14 @@ class RealmAPI {
     func delete(matching date: Date) throws -> Bool {
         do {
             let realm = try Realm()
+            let startOfDay = Calendar.current.startOfDay(for: date)
+            guard let startOfNextDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay) else {
+                return false
+            }
             guard let savedData = realm.objects(RealmDataModel.self)
-                .filter("date == %@", date)
+                .filter("date >= %@ AND date < %@", startOfDay, startOfNextDay)
                 .first else {
+                debugPrint("❌ Realm API delete error: record not found for \(date.summary)")
                 return false
             }
 
