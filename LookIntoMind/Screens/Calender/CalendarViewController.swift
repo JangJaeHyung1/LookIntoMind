@@ -126,7 +126,7 @@ extension CalendarViewController {
         todayBtn.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let self else { return }
-                self.calendarView.setCurrentPage(self.today, animated: true)
+                self.calendarView.setCurrentPage(self.today, animated: false)
             })
             .disposed(by: disposeBag)
     }
