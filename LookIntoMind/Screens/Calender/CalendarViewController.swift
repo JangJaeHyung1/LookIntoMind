@@ -29,6 +29,19 @@ class CalendarViewController: UIViewController {
         btn.imageView?.contentMode = .scaleAspectFit
         return btn
     }()
+
+    private let todayBtn: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("오늘", for: .normal)
+        btn.setTitleColor(BaseColor.black, for: .normal)
+        btn.titleLabel?.font = BaseFont.body4
+        btn.backgroundColor = BaseColor.gray6
+        btn.layer.cornerRadius = 8
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.adjustsImageWhenHighlighted = false
+        btn.accessibilityLabel = "오늘 날짜로 이동"
+        return btn
+    }()
     
     private let calendarView: FSCalendar = {
         let view = FSCalendar()
@@ -49,10 +62,8 @@ class CalendarViewController: UIViewController {
         return lbl
     }()
     
-    var currentPage: Date?
     let calendarCurrent = Calendar.current
     let today: Date = Date()
-    var dateComponents = DateComponents()
     var records: [DataModel] = [] {
         didSet {
             
@@ -111,6 +122,13 @@ extension CalendarViewController {
                 self.moveCurrentPage(moveUp: true)
             })
             .disposed(by: disposeBag)
+
+        todayBtn.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self else { return }
+                self.calendarView.setCurrentPage(self.today, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func addViews() {
@@ -118,6 +136,7 @@ extension CalendarViewController {
         view.addSubview(rightBtn)
         view.addSubview(leftBtn)
         view.addSubview(titleLbl)
+        view.addSubview(todayBtn)
     }
     
     private func setConstraints() {
@@ -143,16 +162,25 @@ extension CalendarViewController {
             make.centerX.equalToSuperview()
             make.centerY.equalTo(leftBtn)
         }
+        todayBtn.snp.makeConstraints { make in
+            make.width.equalTo(48)
+            make.height.equalTo(34)
+            make.trailing.equalTo(calendarView.snp.trailing)
+            make.centerY.equalTo(leftBtn)
+        }
     }
 }
 
 extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UICollectionViewDelegateFlowLayout {
     
     private func moveCurrentPage(moveUp: Bool) {
-        dateComponents.month = moveUp ? 1 : -1
-        currentPage = calendarCurrent.date(byAdding: dateComponents, to: currentPage ?? today)
-        self.calendarView.setCurrentPage(currentPage!, animated: true)
-        
+        let monthOffset = moveUp ? 1 : -1
+        guard let targetPage = calendarCurrent.date(
+            byAdding: .month,
+            value: monthOffset,
+            to: calendarView.currentPage
+        ) else { return }
+        calendarView.setCurrentPage(targetPage, animated: true)
     }
     
     private func setCalendar() {
