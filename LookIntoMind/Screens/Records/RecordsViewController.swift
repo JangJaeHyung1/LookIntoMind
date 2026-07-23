@@ -238,7 +238,7 @@ extension RecordsViewController {
         let editViewController = FirstCreateViewController(
             loadData: record,
             todayDate: recordDate,
-            editingDate: recordDate,
+            isEdit: true,
             onEditCompleted: { [weak self] updatedRecord in
                 self?.apply(updatedRecord)
             }

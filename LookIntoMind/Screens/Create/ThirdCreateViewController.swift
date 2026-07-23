@@ -128,7 +128,7 @@ class ThirdCreateViewController: UIViewController {
     var subCategory: String
     var todayDate: Date
     var loadData: DataModel?
-    private let editingDate: Date?
+    private let isEdit: Bool
     private let onEditCompleted: ((DataModel) -> Void)?
     
     override func viewDidLoad() {
@@ -141,14 +141,14 @@ class ThirdCreateViewController: UIViewController {
         mainCategory: MainCategory,
         subCategory: String,
         todayDate: Date,
-        editingDate: Date? = nil,
+        isEdit: Bool = false,
         onEditCompleted: ((DataModel) -> Void)? = nil
     ) {
         self.loadData = loadData
         self.mainCategory = mainCategory
         self.subCategory = subCategory
         self.todayDate = todayDate
-        self.editingDate = editingDate
+        self.isEdit = isEdit
         self.onEditCompleted = onEditCompleted
         
         self.subCategoryLbl.text = subCategory
@@ -226,8 +226,8 @@ extension ThirdCreateViewController {
                 Task {
                     let toRecordData = DataModel(date: self.todayDate, category: self.mainCategory, subCategory: self.subCategory, content: self.textView.text)
                     let didSave: Bool
-                    if let editingDate = self.editingDate {
-                        didSave = try RealmAPI.shared.update(item: toRecordData, matching: editingDate)
+                    if self.isEdit {
+                        didSave = try RealmAPI.shared.update(item: toRecordData, matching: self.todayDate)
                     } else {
                         didSave = try RealmAPI.shared.save(item: toRecordData)
                     }
@@ -238,12 +238,12 @@ extension ThirdCreateViewController {
                     }
 
                     RealmAPI.shared.refreshCachedData()
-                    if self.editingDate == nil {
+                    if !self.isEdit {
                         _ = try RealmAPI.shared.deleteTemp()
                     }
                     SaveData.reset()
 
-                    if self.editingDate != nil {
+                    if self.isEdit {
                         self.onEditCompleted?(toRecordData)
                         self.finishEditing()
                     } else {

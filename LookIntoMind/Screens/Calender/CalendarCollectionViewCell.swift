@@ -78,11 +78,9 @@ class CalendarCollectionViewCell: FSCalendarCell {
             make.center.equalTo(contentView)
         }
     }
-    func configure(with presentables: [DataModel], date: Date) {
-        dateLbl.text = date.toString(date.day)
+    func configure(with record: DataModel?, date: Date, isToday: Bool) {
+        dateLbl.text = String(Calendar.current.component(.day, from: date))
         dateLbl.font = BaseFont.body2_num
-        let isToday = Date().summary == date.summary
-        let record = presentables.filter({$0.date.summary == date.summary}).first
         if let presentable = record {
             if isToday {
                 backImageView.image = UIImage(named: presentable.category.rawValue)?.withRenderingMode(.alwaysTemplate)

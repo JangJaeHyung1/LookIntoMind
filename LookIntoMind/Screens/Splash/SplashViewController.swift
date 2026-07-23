@@ -29,8 +29,10 @@ class SplashViewController: UIViewController {
         gifImage.animate(withGIFNamed: "Splash")
         Timer.scheduledTimer(withTimeInterval: 1.6, repeats: false, block: {[weak self] timer in
             // todo 0.1 -> 1.6s
-            self?.gifImage.stopAnimatingGIF()
-            self?.goMain()
+            guard let self else { return }
+            self.gifImage.prepareForReuse()
+            self.gifImage.image = nil
+            self.goMain()
         })
     }
     

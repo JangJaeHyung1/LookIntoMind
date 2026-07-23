@@ -61,7 +61,7 @@ class FirstCreateViewController: UIViewController {
     // MARK: - var
     var todayDate: Date
     var loadData: DataModel?
-    private let editingDate: Date?
+    private let isEdit: Bool
     private let onEditCompleted: ((DataModel) -> Void)?
     var selectedCategory: MainCategory? {
         didSet {
@@ -112,11 +112,11 @@ class FirstCreateViewController: UIViewController {
     init(
         loadData: DataModel?,
         todayDate: Date,
-        editingDate: Date? = nil,
+        isEdit: Bool = false,
         onEditCompleted: ((DataModel) -> Void)? = nil
     ) {
         self.loadData = loadData
-        self.editingDate = editingDate
+        self.isEdit = isEdit
         self.onEditCompleted = onEditCompleted
         if let tempContent = loadData?.content {
             SaveData.content = tempContent
@@ -182,7 +182,7 @@ extension FirstCreateViewController {
         naviView.backBtn.rx.tap
             .subscribe(onNext:{ [weak self] res in
                 guard let self else { return }
-                if editingDate != nil {
+                if isEdit {
                     SaveData.reset()
                     if navigationController?.viewControllers.first === self,
                        navigationController?.presentingViewController != nil {
@@ -239,7 +239,7 @@ extension FirstCreateViewController {
             loadData: loadData,
             mainCategory: mainCategory,
             todayDate: todayDate,
-            editingDate: editingDate,
+            isEdit: isEdit,
             onEditCompleted: onEditCompleted
         )
         self.navigationController?.pushViewController(nextVC, animated: false)

@@ -70,7 +70,7 @@ class SecondCreateViewController: UIViewController {
     }
     var subCategory: [String]
     var todayDate: Date
-    private let editingDate: Date?
+    private let isEdit: Bool
     private let onEditCompleted: ((DataModel) -> Void)?
     
     override func viewDidLoad() {
@@ -82,7 +82,7 @@ class SecondCreateViewController: UIViewController {
         loadData: DataModel?,
         mainCategory: MainCategory,
         todayDate: Date,
-        editingDate: Date? = nil,
+        isEdit: Bool = false,
         onEditCompleted: ((DataModel) -> Void)? = nil
     ) {
         self.loadData = loadData
@@ -90,7 +90,7 @@ class SecondCreateViewController: UIViewController {
         self.mainCategory = mainCategory
         self.subCategory = SubCategory.array[mainCategory] ?? []
         self.todayDate = todayDate
-        self.editingDate = editingDate
+        self.isEdit = isEdit
         self.onEditCompleted = onEditCompleted
         super.init(nibName: nil, bundle: nil)
     }
@@ -163,7 +163,7 @@ extension SecondCreateViewController {
             mainCategory: mainCategory,
             subCategory: subCategory,
             todayDate: todayDate,
-            editingDate: editingDate,
+            isEdit: isEdit,
             onEditCompleted: onEditCompleted
         )
         self.navigationController?.pushViewController(nextVC, animated: false)

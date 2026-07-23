@@ -64,11 +64,7 @@ class CalendarViewController: UIViewController {
     
     let calendarCurrent = Calendar.current
     let today: Date = Date()
-    var records: [DataModel] = [] {
-        didSet {
-            
-        }
-    }
+    private var recordsByDate: [Date: DataModel] = [:]
     
     private let disposeBag = DisposeBag()
     
@@ -77,7 +73,15 @@ class CalendarViewController: UIViewController {
         setUp()
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.records = LoadData.items
+        super.viewWillAppear(animated)
+        var newRecordsByDate: [Date: DataModel] = [:]
+
+        for record in LoadData.items {
+            let startOfDay = calendarCurrent.startOfDay(for: record.date)
+            newRecordsByDate[startOfDay] = record
+        }
+
+        self.recordsByDate = newRecordsByDate
         calendarView.reloadData()
     }
     
@@ -97,7 +101,6 @@ extension CalendarViewController {
         addViews()
         setConstraints()
         bind()
-        setCalendar()
     }
     
     private func configure() {
@@ -214,7 +217,12 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UICo
     func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
         
         guard let cell = calendar.dequeueReusableCell(withIdentifier: CalendarCollectionViewCell.cellId, for: date, at: position) as? CalendarCollectionViewCell else { return FSCalendarCell() }
-        cell.configure(with: self.records, date: date)
+        let startOfDay = calendarCurrent.startOfDay(for: date)
+        cell.configure(
+            with: recordsByDate[startOfDay],
+            date: date,
+            isToday: calendarCurrent.isDateInToday(date)
+        )
         return cell
     }
     
@@ -232,8 +240,8 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, UICo
         }
     }
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-    
-        guard let selectedData = records.filter({$0.date.summary == date.summary}).first else {
+        let startOfDay = calendarCurrent.startOfDay(for: date)
+        guard let selectedData = recordsByDate[startOfDay] else {
             return
         }
         presentRecordVC(mainCategory: selectedData.category, subCategory: selectedData.subCategory, content: selectedData.content, recordDate: selectedData.date, backEnable: false)
