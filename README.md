@@ -36,3 +36,31 @@
   
 ![image](https://github.com/JangJaeHyung1/LookIntoMind/assets/37135479/067b9793-97d3-4751-ba9f-1cc8614649e3)
 
+### 4. 아카이빙
+
+#### 캘린더 일기 조회 성능 개선
+
+기존에는 `Date`를 문자열로 변환하여 비교하고, 캘린더 셀마다 전체 일기 배열을 반복해서 검색하는 문제가 있었습니다. 이를 날짜를 키로 사용하는 딕셔너리 구조로 변경해 일기를 바로 조회하도록 개선했습니다.
+
+```swift
+let record = records.filter {
+    $0.date.summary == date.summary // 예: "2026.07.27"
+}.first
+```
+
+일기가 1,000개이고 한 달에 30개의 날짜 셀을 표시한다면, 달력을 넘겨 새로운 월의 셀을 구성할 때마다 최대 30,000번의 날짜 비교 조회가 발생할 수 있습니다.
+
+일기 데이터를 날짜별 딕셔너리로 구성하고:
+
+```swift
+private var recordsByDate: [Date: DataModel] = [:]
+```
+
+시간 값의 차이를 제거하기 위해 날짜를 하루의 시작 시점으로 통일한 뒤 조회했습니다.
+
+```swift
+let date = calendarCurrent.startOfDay(for: date)
+let record = recordsByDate[date]
+```
+
+그 결과 셀 하나의 조회 비용을 `O(N)`에서 평균 `O(1)`로 개선하고, 반복적인 문자열 변환과 전체 배열 검색을 제거했습니다.
